@@ -798,7 +798,7 @@
     <Content Include="deep-into-ext4\14.mvc\oa\index.html" />
     <Content Include="deep-into-ext4\14.mvc\oa\localXHR.js" />
     <Content Include="deep-into-ext4\14.mvc\oa\styles\ext-patch.css" />
-    <Content Include="Demoes\02-01.html" />
+    <Content Include="Demoes\chapter2.html" />
     <Content Include="Demoes\demo1.html" />
     <Content Include="examples\app\feed-viewer\all-classes.js" />
     <Content Include="examples\app\feed-viewer\app.js" />

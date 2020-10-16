@@ -1,0 +1,148 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+    <title>03.grid</title>
+    <link href="../resources/css/ext-all.css" rel="stylesheet" />
+    <script type="text/javascript" src="../ext-all.js"></script>
+    <script type="text/javascript">
+        Ext.onReady(function () {
+        /// <reference path="../ext/ext-all-dev.js" />//智能提示
+
+            //-------------1---------------
+            //var columns = [
+            //    { header: '编号', dataIndex: 'id' },
+            //    { header: '名称', dataIndex: 'name' },
+            //    { header: '描述', dataIndex: 'descn' }
+            //];
+
+            //var data = [
+            //    ['1', 'name1', 'descn1'],
+            //    ['2', 'name2', 'descn2'],
+            //    ['3', 'name3', 'descn3'],
+            //    ['4', 'name4', 'descn4'],
+            //    ['5', 'name5', 'descn5']
+            //];
+
+            //var store = new Ext.data.ArrayStore({
+            //    data: data,
+            //    fields: [
+            //        { name: 'id' },
+            //        { name: 'name' },
+            //        { name: 'descn' }
+            //    ]
+            //});
+            //store.load();
+
+            //var grid = new Ext.grid.GridPanel({
+            //    autoHeight: true,
+            //    width:300,
+            //    renderTo: 'grid',
+            //    store: store,
+            //    columns: columns
+            //});
+
+            //-----------------2-------------------
+            //var box = new Ext.Component({
+            //    style: "background-color: red; position: absolute;",
+            //    width: 100,
+            //    height: 100,
+            //});
+            //box.render();
+
+            //----------------3------------------
+            //var panel = new Ext.Panel({
+            //        el: 'grid',
+            //        title: '窗体A',
+            //        html: '666',
+            //        width: 100,
+            //        height: 100,
+            //        floating: true
+            //    })
+            //    panel.render();
+
+            //------------------4------------------------
+           //new Ext.Viewport({
+           //    layout: 'border',
+           //     items: [{
+           //         xtype: 'panel',
+           //         region:'north'
+           //     }, { region: 'south' }, { region: 'west' }, { region: 'east'}, {region:'center'}]
+           // })
+
+            //Ext.create('Ext.container.Viewport', {
+            //    layout: 'border',
+            //    items: [{
+            //        region: 'north',
+            //        html: '<h1 class="x-panel-header">Page Title</h1>',
+            //        border: false,
+            //        margins: '0 0 5 0'
+            //    }, {
+            //        region: 'west',
+            //        collapsible: true,
+            //        title: 'Navigation',
+            //        width: 150
+            //        // 这里通常可以使用 TreePanel 或者 AccordionLayout布局的导航菜单
+            //    }, {
+            //        region: 'south',
+            //        title: 'South Panel',
+            //        collapsible: true,
+            //        html: 'Information goes here',
+            //        split: true,
+            //        height: 100,
+            //        minHeight: 100
+            //    }, {
+            //        region: 'east',
+            //        title: 'East Panel',
+            //        collapsible: true,
+            //        split: true,
+            //        width: 150
+            //    }, {
+            //        region: 'center',
+            //        xtype: 'tabpanel', // TabPanel本身没有title属性
+            //        activeTab: 0,      // 配置默认显示的激活面板
+            //        items: {
+            //            title: 'Default Tab',
+            //            html: 'The first tab\'s content. Others may be added dynamically'
+            //        }
+            //    }]
+            //});
+            //-------------------5-------------------
+        //    Person = function (name) {
+        //        Ext.util.Observable.prototype.constructor.call(this);//必须要有这行..\原因:待考证
+        //        this.name = arguments[0];
+        //        this.addEvents("work", "study");
+        //    }
+        //    Ext.extend(Person, Ext.util.Observable, {//使Person继承Ext.util.Observable所有属性
+        //        info: function (event) {
+        //            return this.name + ' is ' + event + 'ing';
+        //        }
+        //    })
+        //    var me = new Person("gao");
+        //    me.on('funwork', function () {//添加监听事件
+        //        Ext.Msg.alert('event', this.name + "在上班的路上")
+        //    });
+        //    me.on('funstudy', function (project) {
+        //        Ext.Msg.alert('event', this.name + "在学习" + project + "中");
+        //    })
+        //    Ext.get('work').on('click', function () {//获取id为"work"的元素并添加绑定事件和事件处理函数
+        //        me.fireEvent('funwork');
+        //    });
+        //    Ext.get('study').on('click', function () {
+        //        me.fireEvent('funstudy','日语');
+        //    });
+            //----------------------------6-----------------------
+
+            var tes=
+
+        //});
+    </script>
+</head>
+    <body>
+        <script type="text/javascript" src="../examples/shared/examples.js"></script>
+        <button id="test">案例6</button>
+        <div id="grid"></div>
+
+        <button id="work">work</button>
+        <button id="study">study</button>
+    </body>
+</html>

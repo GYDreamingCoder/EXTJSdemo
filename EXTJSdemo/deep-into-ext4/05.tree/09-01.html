@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        <title>05.tree</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../13.student/student/styles/ext-patch.css" />
+        <script type="text/javascript" src="../../ext-all.js"></script>
+        <script type="text/javascript" src="localXHR.js"></script>
+        <script type="text/javascript">
+Ext.onReady(function(){
+
+    var tree = new Ext.tree.TreePanel({
+		store: new Ext.data.TreeStore({
+			folderSort: false,
+			proxy: {
+				type: 'ajax',
+				url: '09-01.txt'
+			},
+			root: {
+				text: '我是根'
+			}
+		})
+    });
+
+    tree.render('tree');
+
+
+});
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../../examples/shared/examples.js"></script>
+        <div id="tree"></div>
+    </body>
+</html>

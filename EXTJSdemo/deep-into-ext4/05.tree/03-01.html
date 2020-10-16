@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        <title>05.tree</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../13.student/student/styles/ext-patch.css" />
+        <script type="text/javascript" src="../../ext-all.js"></script>
+        <script type="text/javascript" src="localXHR.js"></script>
+        <script type="text/javascript">
+Ext.onReady(function(){
+
+    var tree = new Ext.tree.TreePanel({
+		store: new Ext.data.TreeStore({
+			proxy: {
+				type: 'ajax',
+				url: '01-04-01.txt'
+			},
+			root: {
+				text: '我是根'
+			}
+		})
+    });
+
+    tree.render('tree');
+
+    var contextmenu = new Ext.menu.Menu({
+        id: 'theContextMenu',
+        items: [{
+            text: '有本事点我哦！',
+            handler: function(){
+                alert('我被击中了，啊……');
+            }
+        }]
+    });
+    tree.on("itemcontextmenu", function(view, record, item, index, e){
+        e.preventDefault();
+        contextmenu.showAt(e.getXY());
+    });
+});
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../../examples/shared/examples.js"></script>
+        <div id="tree" style="height:300px;"></div>
+    </body>
+</html>

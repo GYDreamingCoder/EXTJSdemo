@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Charts</title>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+    <script type="text/javascript" src="../../ext-all.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../examples/shared/example.css" />
+    <script type="text/javascript">
+Ext.onReady(function() {
+
+	Ext.define('WeatherPoint', {
+		extend: 'Ext.data.Model',
+		fields: ['temperature', 'date']
+	});
+
+	var store = Ext.create('Ext.data.Store', {
+		model: 'WeatherPoint',
+		data: [
+			{ temperature: 48, date: new Date(2011, 1, 1, 8) },
+			{ temperature: 63, date: new Date(2011, 1, 2, 9) },
+			{ temperature: 43, date: new Date(2011, 1, 3, 10) },
+			{ temperature: 78, date: new Date(2011, 1, 4, 11) },
+			{ temperature: 71, date: new Date(2011, 1, 5, 12) },
+			{ temperature: 70, date: new Date(2011, 1, 6, 12) },
+			{ temperature: 76, date: new Date(2011, 1, 7, 12) }
+		]
+	});
+
+	new Ext.Viewport({
+		layout: 'fit',
+		items: [{
+			xtype: 'chart',
+			store: store,
+			axes: [
+				{
+					title: 'Temperature',
+					type: 'Numeric',
+					position: 'left',
+					fields: ['temperature'],
+					minimum: 0,
+					maximum: 100
+				},
+				{
+					title: 'Time',
+					type: 'Category',
+					position: 'bottom',
+					fields: ['date']
+				}
+			],
+			series: [
+				{
+					type: 'column',
+					xField: 'date',
+					yField: 'temperature'
+				},
+				{
+					type: 'line',
+					xField: 'date',
+					yField: 'temperature'
+				}
+			]
+		}]
+	});
+});
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript" src="../../examples/shared/examples.js"></script>
+  </body>
+</html>

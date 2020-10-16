@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Direct</title>
+    <link rel="stylesheet" type="text/css" href="ext-4.2.1.883/resources/css/ext-all.css" />
+    <script type="text/javascript" src="ext-4.2.1.883/ext-all.js"></script>
+    <script type="text/javascript" src="sample/api.js"></script>
+    <script type="text/javascript">
+function callback(data) {
+    Ext.Msg.alert('info', data);
+}
+
+Ext.onReady(function() {
+    Ext.Direct.addProvider(Ext.app.REMOTING_API);
+
+    Ext.get('hello').on('click', function() {
+        TestAction.doEcho('Hello World', callback);
+    })
+});
+    </script>
+  </head>
+  <body>
+    <button id="hello">hello</button>
+    <ul>
+      <li><a href="hello.html">hello.html</a></li>
+      <li><a href="batch.html">batch.html</a></li>
+      <li><a href="direct.html">direct.html</a></li>
+      <li><a href="direct-tree.html">direct-tree.html</a></li>
+      <li><a href="direct-grid.html">direct-grid.html</a></li>
+    </ul>
+  </body>
+</html>

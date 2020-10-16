@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>02.basic</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <script type="text/javascript" src="../../ext-all.js"></script>
+        <script type="text/javascript">
+Ext.define('demo.Demo', {
+	name: 'Lingo',
+	hello: function() {
+		return 'Hello ' + this.name;
+	}
+});
+
+var demo = new demo.Demo();
+alert(demo.hello());
+
+Ext.define('demo.DemoWindow', {
+	extend: 'Ext.Window',
+	title: 'demo header',
+	initComponent: function() {
+		Ext.apply(this, {
+			items: [{
+				html: 'panel1'
+			}, {
+				html: 'panel2'
+			}]
+		});
+		this.callParent();
+	}
+});
+
+Ext.define('demo.DemoPanel', {
+	extend: 'Ext.Window',
+	mixins: ['demo.Demo']
+});
+
+alert(new demo.DemoPanel().hello());
+
+Ext.define('demo.DemoObject', {
+	statics: {
+		TYPE_DEFAULT: 0
+	},
+	constructor: function() {
+		// do some init
+	}
+});
+
+Ext.define('demo.DemoInstance', {
+	config: {
+		title: 'demo'
+	}
+});
+
+/*
+Ext.define('demo.DemoInstance', {
+	title: 'demo',
+	getTitle: function() {
+		return this.title;
+	},
+	setTitle: function(title) {
+		this.title = this.applyTitle(title) || title;
+	},
+	applyTitle: function(title) {
+	}
+});
+*/
+
+Ext.onReady(function() {
+	new demo.DemoWindow().show();
+});
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

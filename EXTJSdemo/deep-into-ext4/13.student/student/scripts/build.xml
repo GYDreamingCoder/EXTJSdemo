@@ -1,0 +1,5 @@
+<project name="gzip" default="gzip" basedir=".">
+<target name="gzip">
+	<gzip src="ext-all.js" destfile="ext-all.gz"/>
+</target>
+</project>

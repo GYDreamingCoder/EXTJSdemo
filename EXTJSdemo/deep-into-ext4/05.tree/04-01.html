@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        <title>05.tree</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../13.student/student/styles/ext-patch.css" />
+        <script type="text/javascript" src="../../ext-all.js"></script>
+        <style type="text/css">
+.x-tree-icon-leaf.icon-male {
+    background-image: url(user_male.png)
+}
+        </style>
+        <script type="text/javascript">
+Ext.onReady(function(){
+
+    var tree = new Ext.tree.TreePanel({
+		store: new Ext.data.TreeStore({
+			root: {
+				text: '我是根',
+				icon: 'user_female.png',
+				children: [{
+					text: 'iconCls',
+					iconCls: 'icon-male',
+					leaf: true
+				}, {
+					text: 'icon + iconCls',
+					icon: 'user_female.png',
+					iconCls: 'icon-male',
+					leaf: true
+				}]
+			}
+		})
+    });
+
+    tree.render('tree');
+});
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../../examples/shared/examples.js"></script>
+        <div id="tree" style="height:300px;"></div>
+    </body>
+</html>

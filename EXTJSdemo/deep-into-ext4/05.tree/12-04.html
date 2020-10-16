@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        <title>05.tree</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../13.student/student/styles/ext-patch.css" />
+        <script type="text/javascript" src="../../ext-all.js"></script>
+        <script type="text/javascript" src="localXHR.js"></script>
+
+        <script type="text/javascript">
+
+Ext.onReady(function(){
+    Ext.define('Task', {
+        extend: 'Ext.data.Model',
+        fields: [
+            {name: 'task',     type: 'string'},
+            {name: 'user',     type: 'string'},
+            {name: 'duration', type: 'string'}
+        ]
+    });
+
+    var store = Ext.create('Ext.data.TreeStore', {
+        model: 'Task',
+        proxy: {
+            type: 'ajax',
+            url: '12-04.txt'
+        },
+        folderSort: true
+    });
+
+    var tree = new Ext.tree.TreePanel({
+        width: 550,
+        height: 300,
+        rootVisible:false,
+        autoScroll:true,
+        title: '示例',
+        renderTo: 'tree',
+        collapsible: true,
+        useArrows: true,
+
+        columns:[{
+			xtype: 'treecolumn',
+            text:'任务',
+            width:330,
+            dataIndex:'task',
+			locked: true
+        },{
+            text:'持续时间',
+            width:300,
+            dataIndex:'duration'
+        },{
+            text:'负责人',
+            width:300,
+            dataIndex:'user'
+        }],
+		store: store
+    });
+
+});
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../../examples/shared/examples.js"></script>
+        <div id="tree" style="height:300px;"></div>
+    </body>
+</html>

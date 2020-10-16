@@ -1,0 +1,14 @@
+<nodes>
+    <node>
+	    <text>node 1</text>
+		<leaf>false</leaf>
+    </node>
+	<node>
+		<text>node 2</text>
+		<leaf>true</leaf>
+	</node>
+	<node>
+		<text>node 3</text>
+		<leaf>true</leaf>
+	</node>
+</nodes>

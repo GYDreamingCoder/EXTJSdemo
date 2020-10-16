@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        <title>05.tree</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../13.student/student/styles/ext-patch.css" />
+        <script type="text/javascript" src="../../ext-all.js"></script>
+        <script type="text/javascript" src="localXHR.js"></script>
+        <style type="text/css">
+            .task {
+                background-image: url(../../examples/shared/icons/fam/cog.gif) !important;
+            }
+            .task-folder {
+                background-image: url(../../examples/shared/icons/fam/folder_go.gif) !important;
+            }
+        </style>
+        <script type="text/javascript">
+Ext.Loader.setConfig({
+    enabled: true
+});
+Ext.Loader.setPath('Ext.ux', '../../examples/ux');
+
+Ext.require([
+    'Ext.data.*',
+    'Ext.grid.*',
+    'Ext.tree.*',
+    'Ext.ux.CheckColumn'
+]);
+
+
+Ext.onReady(function(){
+    Ext.define('Task', {
+        extend: 'Ext.data.Model',
+        fields: [
+            {name: 'task',     type: 'string'},
+            {name: 'user',     type: 'string'},
+            {name: 'duration', type: 'string'}
+        ]
+    });
+
+    var tree = new Ext.tree.TreePanel({
+        width: 550,
+        height: 300,
+        rootVisible:false,
+        autoScroll:true,
+        title: '示例',
+        renderTo: 'tree',
+        collapsible: true,
+        useArrows: true,
+
+        columns:[{
+			xtype: 'treecolumn',
+            header:'任务',
+            width:330,
+            dataIndex:'task'
+        },{
+			xtype: 'treecolumn',
+            header:'持续时间',
+            width:100,
+            dataIndex:'duration'
+        },{
+			xtype: 'treecolumn',
+            header:'负责人',
+            width:100,
+            dataIndex:'user'
+        }],
+		store: new Ext.data.TreeStore({
+			model: Task,
+			proxy: {
+				type: 'ajax',
+				url: '11-01.txt'
+			},
+			root: {
+				text: '我是根'
+			}
+		})
+    });
+
+});
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../../examples/shared/examples.js"></script>
+        <div id="tree" style="height:300px;"></div>
+    </body>
+</html>

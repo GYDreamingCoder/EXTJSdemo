@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../ext-all.js"></script>
+    <script src="../ext/Ext.Base.js"></script>
+    <script src="../ext/ext-lang-zh_CN.js"></script>
+    <script src="../ext/ext-all-dev.js"></script>
+    <link href="../css/ext-all.css" rel="stylesheet" />
+    <script>
+        /// <reference path="../ext/ext-all-dev.js" />
+        Ext.onReady(function () {
+            ////----------1.------------------
+            //Ext.define("person", {
+            //    name: 'NoName',
+            //    hello: function () {
+            //        alert('my name is ' + this.name);
+            //    }
+            //})
+            //var demo = new person();//创建对象
+            ////alert(demo.hello());
+
+            ////----------2.------------------
+            //Ext.define('MyPanel', {
+            //    extend: "Ext.Panel"
+            //})
+            //Ext.define()
+
+
+            //var MyPanel1 = new MyPanel({
+            //    html: '好好学习'
+            //});
+            //var MyPanel2 = new MyPanel({
+            //    html: '天天向上'
+            //});
+            //Ext.define("MyWindow", {
+            //    extend: 'Ext.Window',
+            //    title: '子窗体',
+            //    initComponent: function () {
+            //        Ext.apply(this, {
+            //            items: [{ html: 'MyPanel1' }]
+            //        });
+            //        this.callParent();
+            //    }
+            //})
+            //var me = new MyWindow();
+            ////alert(me.hello());//这里会调用父类的hello方法
+
+            //----------3.------------------
+
+            //    var box = new Ext.BoxComponent({
+            //        el: 'test',
+            //        style: 'backgroud-color:red;position:absolute;',
+            //        pageX: 100,
+            //        pageY: 500,
+            //        width: 200,
+            //        height: 200,
+            //    });
+            //    box.render();
+            //});
+
+            //Ext.define('Demoes.demo1', {
+            //    extend: 'Ext.window.Window',
+            //    requires: [],
+            //    height: 400,
+            //    width: 650,
+            //    modal: true,
+            //    style: 'backgroud-color:red;position:absolute;',
+            //    resizable: false,
+            //    constructor: function (config) {
+            //        var me = this,
+            //            config = config || {},
+
+            //        me.box = new Ext.BoxComponent({
+            //            el: 'test',
+            //            style: 'backgroud-color:red;position:absolute;',
+            //            pageX: 100,
+            //            pageY: 500,
+            //            width: 200,
+            //            height: 200,
+            //        });
+            //        box.render();
+
+            //        me.formpanel = Ext.create('Ext.form.Panel', {
+            //            border: false,
+            //            fileupload: true,
+            //            layout: 'border',
+            //            items: [me.box]
+            //        });
+
+            //        var cfg = {
+            //            title: 'title',
+            //            items: [me.formpanel],
+            //            buttons: [me.btnOK, me.btnCancel]
+            //        };
+
+            //        Ext.apply(cfg, config);
+            //        me.callParent([cfg]);
+            //    }
+            //})
+
+            //    var panel = new Ext.panel({
+            //        el: 'test',
+            //        title: '窗体A',
+            //        html: '666',
+            //        width: 100,
+            //        height: 100,
+            //        floating: true
+            //    })
+            //    panel.render();
+
+            var columns = [{ header: "A", dataindex: 'id' }, { header: "A", dataindex: 'id' }, { header: "name", dataindex: 'descn' }];
+            var data = [
+                ['1', 'name1', 'descn1']
+                ['1', 'name1', 'descn1']
+                ['1', 'name1', 'descn1']
+                ['1', 'name1', 'descn1']
+            ]
+            var store = new Ext.data.ArrayStore({
+                data: data,
+                fields: [
+                    { name: 'id' },
+                    { name: 'name' },
+                    { name: 'descn' }
+                ]
+            });
+            store.load();
+
+            var grid = new Ext.grid.GridPanel({
+                autoHeight: true,
+                renderTo: 'grid',
+                store: store,
+                columns: columns
+            })
+        });
+    </script>
+</head>
+<body>
+    <div id="grid"></div>
+    <h1>GMap Window</h1>
+    <p>This example shows how to create an extension and utilize an external library.</p>
+    <input type="button" id="show-btn" value="Gimme a Map" /><br /><br />
+    <p>Note that the js is not minified so it is readable. See <a href="../ux/GMapPanel.js">GMapPanel.js</a> and <a href="gmap.js">gmap.js</a> for the full source code.</p>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        <title>03.grid</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <script type="text/javascript" src="../../ext-all.js"></script>
+        <script type="text/javascript">
+Ext.onReady(function(){
+
+    var columns = [{
+        header: '编号',
+        dataIndex: 'id',
+        editor: {
+			allowBlank: false
+        }
+    }, {
+        header: '名称',
+        dataIndex: 'name',
+        editor: {
+			allowBlank: false
+        }
+    }, {
+        header: '描述',
+        dataIndex: 'descn',
+        editor: {
+			allowBlank: false
+        }
+    }];
+
+    var data = [
+        ['1','name1','descn1'],
+        ['2','name2','descn2'],
+        ['3','name3','descn3'],
+        ['4','name4','descn4'],
+        ['5','name5','descn5']
+    ];
+
+    var store = new Ext.data.ArrayStore({
+		data: data,
+		fields: [
+            {name: 'id'},
+            {name: 'name'},
+            {name: 'descn'}
+        ]
+    });
+
+    store.load();
+
+    var grid = new Ext.grid.GridPanel({
+        autoHeight: true,
+        renderTo: 'grid',
+        store: store,
+        columns: columns,
+		selType: 'cellmodel',
+		plugins: [
+			Ext.create('Ext.grid.plugin.CellEditing', {
+				clicksToEdit: 1
+			})
+		],
+        tbar: ['-', {
+            text: '添加一行',
+            handler: function(){
+                var p = {
+                    id:'',
+                    name:'',
+                    descn:''
+                };
+                //grid.stopEditing();
+                store.insert(0, p);
+                //grid.startEditing(0, 0);
+            }
+        }, '-', {
+            text: '删除一行',
+            handler: function(){
+                Ext.Msg.confirm('信息', '确定要删除？', function(btn){
+                    if (btn == 'yes') {
+                        var sm = grid.getSelectionModel();
+                        var record = sm.getSelection()[0];
+                        store.remove(record);
+                    }
+                });
+            }
+        }, '-']
+    });
+
+});
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../../examples/shared/examples.js"></script>
+        <div id="grid"></div>
+    </body>
+</html>

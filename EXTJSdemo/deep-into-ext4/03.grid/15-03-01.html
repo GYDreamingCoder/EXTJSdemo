@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        <title>03.grid</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <script type="text/javascript" src="../../ext-all.js"></script>
+        <script type="text/javascript">
+Ext.onReady(function(){
+
+    var store1 = new Ext.data.ArrayStore({
+        data: [
+            ['01','name01','descn01'],
+            ['02','name02','descn02'],
+            ['03','name03','descn03'],
+            ['04','name04','descn04'],
+            ['05','name05','descn05']
+        ],
+        fields: [
+            {name: 'id'},
+            {name: 'name'},
+            {name: 'descn'}
+        ]
+    });
+    var store2 = new Ext.data.ArrayStore({
+        data: [
+            ['11','name11','descn11'],
+            ['12','name12','descn12'],
+            ['13','name13','descn13'],
+            ['14','name14','descn14'],
+            ['15','name15','descn15']
+        ],
+        fields: [
+            {name: 'id'},
+            {name: 'name'},
+            {name: 'descn'}
+        ]
+    });
+
+    store1.load();
+    store2.load();
+
+    var columns = [
+        {header:'编号',dataIndex:'id'},
+        {header:'名称',dataIndex:'name'},
+        {header:'描述',dataIndex:'descn'}
+    ];
+
+    var grid1 = new Ext.grid.GridPanel({
+        autoHeight: true,
+        renderTo: 'grid1',
+        store: store1,
+        columns: columns,
+        enableDragDrop: true,
+		viewConfig: {
+			plugins: {
+				ptype: 'gridviewdragdrop'
+			}
+		}
+    });
+    var grid2 = new Ext.grid.GridPanel({
+        autoHeight: true,
+        renderTo: 'grid2',
+        store: store2,
+        columns: columns,
+        enableDragDrop: true,
+		viewConfig: {
+			plugins: {
+				ptype: 'gridviewdragdrop'
+			}
+		}
+    });
+});
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../../examples/shared/examples.js"></script>
+        <div id="grid1" style="margin:20px; float:left; width:350px; height:300px;"></div>
+        <div id="grid2" style="margin:20px; float:left; width:350px; height:300px;"></div>
+    </body>
+</html>

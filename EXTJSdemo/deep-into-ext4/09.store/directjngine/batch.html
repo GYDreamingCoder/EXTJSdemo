@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Direct</title>
+    <link rel="stylesheet" type="text/css" href="ext-4.2.1.883/resources/css/ext-all.css" />
+    <script type="text/javascript" src="ext-4.2.1.883/ext-all.js"></script>
+    <style type="text/css">
+.msg .x-box-mc {
+    font-size:14px;
+}
+
+#msg-div {
+    position:absolute;
+    left:35%;
+    top:10px;
+    width:250px;
+    z-index:20000;
+}
+    </style>
+    <script type="text/javascript" src="example.js"></script>
+    <script type="text/javascript" src="sample/api.js"></script>
+    <script type="text/javascript">
+
+function callback(result) {
+    Ext.example.msg('info', Ext.encode(result));
+}
+
+Ext.onReady(function() {
+    Ext.app.REMOTING_API.enableBuffer = 1000;
+    Ext.Direct.addProvider(Ext.app.REMOTING_API);
+
+    Ext.get('hello').on('click', function() {
+        Hello.doHello("0", callback);
+        Hello.doHello("1", callback);
+        Hello.doHello("2", callback);
+        Hello.doHello("3", callback);
+        Hello.doHello("4", callback);
+    });
+});
+
+    </script>
+  </head>
+  <body>
+    <button id="hello">hello</button><br>
+  </body>
+</html>

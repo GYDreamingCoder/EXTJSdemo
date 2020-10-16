@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+          http://java.sun.com/xml/ns/javaee/web-app_2_4.xsd"
+           version="2.4">
+
+  <!-- DirectJNgine servlet -->
+  <servlet>
+    <servlet-name>DjnServlet</servlet-name>
+    <servlet-class>com.softwarementors.extjs.djn.servlet.DirectJNgineServlet</servlet-class>
+
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>true</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>minify</param-name>
+      <param-value>true</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>providersUrl</param-name>
+      <param-value>djn/directprovider</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>batchRequestsMultithreadingEnabled</param-name>
+      <param-value>true</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>apis</param-name>
+      <param-value>
+        sample
+      </param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>sample.apiFile</param-name>
+      <param-value>sample/api.js</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>sample.apiNamespace</param-name>
+      <param-value>Ext.app</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>sample.classes</param-name>
+      <param-value>
+      sample.Poll,
+      sample.TestAction,
+      sample.Hello,
+      sample.Grid
+      </param-value>
+    </init-param>
+
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DjnServlet</servlet-name>
+    <url-pattern>/djn/directprovider/*</url-pattern>
+  </servlet-mapping>
+</web-app>

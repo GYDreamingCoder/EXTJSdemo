@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        <title>04.form</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <script type="text/javascript" src="../../ext-all.js"></script>
+        <script type="text/javascript">
+Ext.onReady(function(){
+
+    var form = new Ext.form.FormPanel({
+        title: 'File Upload Field',
+        fileUpload: true,
+        frame: true,
+        width: 400,
+        items: [{
+            xtype:"fileuploadfield",
+            fieldLabel:"上传",
+            name:"fileuploadfield"
+        }]
+    });
+
+    form.render(document.body);
+
+});
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

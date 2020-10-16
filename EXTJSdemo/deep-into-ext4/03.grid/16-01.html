@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        <title>03.grid</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <script type="text/javascript" src="../../ext-all.js"></script>
+        <script type="text/javascript">
+Ext.onReady(function(){
+
+    var columns = [
+        {header:'编号',dataIndex:'id'},
+        {header:'名称',dataIndex:'name'},
+        {header:'描述',dataIndex:'descn'}
+    ];
+
+    var data = [
+        ['1','name1','descn1'],
+        ['2','name2','descn2'],
+        ['3','name3','descn3'],
+        ['4','name4','descn4'],
+        ['5','name5','descn5']
+    ];
+
+    var store = new Ext.data.ArrayStore({
+		data: data,
+		fields: [
+            {name: 'id'},
+            {name: 'name'},
+            {name: 'descn'}
+        ]
+    });
+    store.load();
+
+    var grid = new Ext.grid.GridPanel({
+        autoHeight: true,
+        renderTo: 'grid',
+        store: store,
+        columns: columns
+    });
+
+    var contextmenu = new Ext.menu.Menu({
+        id: 'theContextMenu',
+        items: [{
+            text: '查看详情',
+            handler: function(){
+            }
+        }]
+    });
+    grid.on("itemcontextmenu", function(view, record, item, index, e){
+        e.preventDefault();
+        contextmenu.showAt(e.getXY());
+    });
+
+});
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../../examples/shared/examples.js"></script>
+        <div id="grid" style="height:265px;"></div>
+    </body>
+</html>

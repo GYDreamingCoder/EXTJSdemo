@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        <title>05.tree</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../13.student/student/styles/ext-patch.css" />
+        <script type="text/javascript" src="../../ext-all.js"></script>
+        <script type="text/javascript" src="localXHR.js"></script>
+        <script type="text/javascript">
+Ext.onReady(function(){
+    var tree = new Ext.tree.TreePanel({
+        viewConfig: {
+			plugins: {
+				ptype: 'treeviewdragdrop'
+			}
+		},
+		store: new Ext.data.TreeStore({
+			proxy: {
+				type: 'ajax',
+				url: '06-01.txt'
+			},
+			root: {
+				text: '我是根一'
+			}
+		})
+    });
+
+    tree.render('tree1');
+
+    var tree = new Ext.tree.TreePanel({
+        viewConfig: {
+			plugins: {
+				ptype: 'treeviewdragdrop'
+			}
+		},
+		store: new Ext.data.TreeStore({
+			proxy: {
+				type: 'ajax',
+				url: '06-01.txt'
+			},
+			root: {
+				text: '我是根二'
+			}
+		})
+    });
+
+    tree.render('tree2');
+});
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../../examples/shared/examples.js"></script>
+        <div id="tree1" style="height:100px;margin:50px;float:left;"></div>
+        <div id="tree2" style="height:100px;margin:50px;float:left;"></div>
+    </body>
+</html>

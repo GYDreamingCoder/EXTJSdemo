@@ -141,8 +141,9 @@
             //})
 
             //----------------------------7,监听空格-------------------------
+
             Ext.get("ipt").on('keypress', function (e) {
-                if (e.charCode == Ext.EventObjectImpl.SPACE) {
+                if (e.charCode == Ext.EventObject.SPACE) {
                     Ext.Msg.alert("按下了空格键");
                 }
             })

@@ -130,18 +130,34 @@
         //    Ext.get('study').on('click', function () {
         //        me.fireEvent('funstudy','日语');
         //    });
+
             //----------------------------6-----------------------
+            //var test = Ext.get('test');
+            //test.on('click', function () {
+            //    alert("1");
+            //})
+            //test.on('click', function () {
+            //    alert("2");
+            //})
 
+            //----------------------------7,监听空格-------------------------
+            Ext.get("ipt").on('keypress', function (e) {
+                if (e.charCode == Ext.EventObjectImpl.SPACE) {
+                    Ext.Msg.alert("按下了空格键");
+                }
+            })
 
-        //});
+        });
     </script>
 </head>
     <body>
         <script type="text/javascript" src="../examples/shared/examples.js"></script>
-        <button id="test">案例6</button>
-        <div id="grid"></div>
+        <!--<button id="test">案例6</button>-->
+        <!--<div id="grid"></div>
 
         <button id="work">work</button>
-        <button id="study">study</button>
+        <button id="study">study</button>-->
+
+        <input type="text" id="ipt"/>
     </body>
 </html>

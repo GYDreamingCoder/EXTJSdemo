@@ -142,14 +142,35 @@
 
             //----------------------------7,监听空格-------------------------
 
-            Ext.get("ipt").on('keypress', function (e) {
-                if (e.charCode == Ext.EventObject.SPACE) {//将书中介绍的Ext.EventObjectImpl改为Ext.EventObject即可生效
-                    Ext.Msg.alert("按下了空格键");
-                }
+            //Ext.get("ipt").on('keypress', function (e) {
+            //    if (e.charCode == Ext.EventObject.SPACE) {//将书中介绍的Ext.EventObjectImpl改为Ext.EventObject即可生效
+            //        Ext.Msg.alert("按下了空格键");
+            //    }
+            //})
+
+
+            //--------------8、自定义事件----------------
+            //var fn = function (e, el, args) {//arg中的参数为single: true,delay: 1000,testID: 4
+            //    alert("案例8");
+            //    alert(args.testID);
+            //}
+            //Ext.get('test1').on('click', fn, this, {
+            //    single: true,
+            //    delay: 1000,
+            //    testID: 4
+            //});
+
+            //--------------------9,一次定义多个事件监听器---------------
+            Ext.get('test2').on({
+                'click': {
+                    fn: fn
+                },
+                'mouseover': { fn: fn,single:true,delay:1000 }
             })
 
         });
     </script>
+
 </head>
     <body>
         <script type="text/javascript" src="../examples/shared/examples.js"></script>
@@ -159,6 +180,10 @@
         <button id="work">work</button>
         <button id="study">study</button>-->
 
-        <input type="text" id="ipt"/>
+        <!--<input type="text" id="ipt"/>-->
+
+        <!--<button id="test1">案例6</button>-->
+        <button id="test2">案例9</button>
+
     </body>
 </html>

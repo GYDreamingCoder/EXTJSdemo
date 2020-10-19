@@ -118,13 +118,13 @@
         //        }
         //    })
         //    var me = new Person("gao");
-        //    me.on('funwork', function () {//添加监听事件
+        //    me.on('funwork', function () {//给对象添加监听事件
         //        Ext.Msg.alert('event', this.name + "在上班的路上")
         //    });
-        //    me.on('funstudy', function (project) {
+        //    me.on('funstudy', function (project) {//给对象添加监听事件和形参
         //        Ext.Msg.alert('event', this.name + "在学习" + project + "中");
         //    })
-        //    Ext.get('work').on('click', function () {//获取id为"work"的元素并添加绑定事件和事件处理函数
+        //    Ext.get('work').on('click', function () {//给id为"work"的元素并添加绑定事件和事件处理函数
         //        me.fireEvent('funwork');
         //    });
         //    Ext.get('study').on('click', function () {
@@ -161,11 +161,42 @@
             //});
 
             //--------------------9,一次定义多个事件监听器---------------
-            Ext.get('test2').on({
-                'click': {
-                    fn: fn
-                },
-                'mouseover': { fn: fn,single:true,delay:1000 }
+            //var fn = function (e, el, args) {//arg中的参数为single: true,delay: 1000,testID: 4
+            //    alert("鼠标点击了一下");
+            //}
+            //var fn2 = function () {
+            //    alert("鼠标覆盖了一下")
+            //}
+            //Ext.get('test2').on({
+            //    'click': {
+            //        fn: fn
+            //    },
+            //    'mouseover': { fn: fn2,single:true,delay:1000 }
+            //})
+
+            //----------------------10设置事件拦截器-----------
+            Person = function (name) {
+                Ext.util.Observable.prototype.constructor.call(this);//必须要有这行..\原因:待考证
+                this.name = arguments[0];
+                this.addEvents("work", "study");
+            }
+            Ext.extend(Person, Ext.util.Observable, {//使Person继承Ext.util.Observable所有属性
+                info: function (event) {
+                    return this.name + ' is ' + event + 'ing';
+                }
+            })
+            person = new Person();
+            Ext.get('capture1').on('click', function () {
+                Ext.util.Observable.capture(person, function () {
+                    alert("capture1");//执行拦截时的函数,执行完毕后继续执行被拦截的函数
+                    return true;//拦截但不终止事件
+                })
+            })
+            Ext.get('capture2').on('click', function () {
+                Ext.util.Observable.capture(person, function () {
+                    alert("capture2");//执行完毕后终止被拦截的函数
+                    return false;//拦截且终止
+                })
             })
 
         });
@@ -183,7 +214,10 @@
         <!--<input type="text" id="ipt"/>-->
 
         <!--<button id="test1">案例6</button>-->
-        <button id="test2">案例9</button>
+        <!--<button id="test2">案例9</button>-->
+
+        <button id="capture1">拦截事件</button>
+        <button id="capture2">拦截并终止事件</button>
 
     </body>
 </html>

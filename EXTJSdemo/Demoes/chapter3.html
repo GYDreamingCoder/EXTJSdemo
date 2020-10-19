@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>第三章</title>
+    <link href="../resources/css/ext-all.css" rel="stylesheet" />
+    <script type="text/javascript" src="../ext-all.js"></script>
+    <script>
+        /// <reference path="../ext/ext-all-dev.js" />//智能提示
+        Ext.onReady(function(){
+            var columns = [//注意!!!此处dataIndex该大写的字母必须大写,否则数据无法显示
+                {header:'编号',dataIndex:'id'},
+                {header:'姓名',dataIndex:'name'},
+                {header:'性别',dataIndex:'sex'}
+            ]
+            var data = [
+                ['1','gy','男'],
+                ['2','xm','男'],
+                ['3','ts','女'],
+                ['4','ge','女']
+            ]
+            
+            var store = new Ext.data.ArrayStore({
+                data: data,
+                fields: [
+                    { name: 'id' },
+                    { name: 'name' },
+                    { name: 'sex' }
+                ]
+            });
+            store.load();
+
+            var grid = new Ext.grid.GridPanel({
+                width:300,
+                autoHeight: true,
+                renderTo:'grid',
+                store: store,
+                columns: columns
+            })
+        })
+        
+    </script>
+</head>
+<body>
+    <div id="grid"></div>
+</body>
+</html>

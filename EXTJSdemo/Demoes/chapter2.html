@@ -174,50 +174,83 @@
             //    'mouseover': { fn: fn2,single:true,delay:1000 }
             //})
 
-            //----------------------10设置事件拦截器-----------
-            Person = function (name) {
-                Ext.util.Observable.prototype.constructor.call(this);//必须要有这行..\原因:待考证
-                this.name = arguments[0];
-                this.addEvents("work", "study");
-            }
-            Ext.extend(Person, Ext.util.Observable, {//使Person继承Ext.util.Observable所有属性
-                info: function (event) {
-                    return this.name + ' is ' + event + 'ing';
-                }
-            })
-            person = new Person();
-            Ext.get('capture1').on('click', function () {
-                Ext.util.Observable.capture(person, function () {
-                    alert("capture1");//执行拦截时的函数,执行完毕后继续执行被拦截的函数
-                    return true;//拦截但不终止事件
-                })
-            })
-            Ext.get('capture2').on('click', function () {
-                Ext.util.Observable.capture(person, function () {
-                    alert("capture2");//执行完毕后终止被拦截的函数
-                    return false;//拦截且终止
-                })
-            })
+            //----------------------10、设置事件拦截器-----------
+            //Person = function (name) {
+            //    Ext.util.Observable.prototype.constructor.call(this);//必须要有这行..\原因:待考证
+            //    this.name = arguments[0];
+            //    this.addEvents("work", "study");
+            //}
+            //Ext.extend(Person, Ext.util.Observable, {//使Person继承Ext.util.Observable所有属性
+            //    info: function (event) {
+            //        return this.name + ' is ' + event + 'ing';
+            //    }
+            //})
+            //var me = new Person("gao");
+            //me.on('funwork', function () {//给对象添加监听事件
+            //    Ext.Msg.alert('event', this.name + "在上班的路上")
+            //});
+            //me.on('funstudy', function (project) {//给对象添加监听事件和形参
+            //    Ext.Msg.alert('event', this.name + "在学习" + project + "中");
+            //})
+            //Ext.get('work').on('click', function () {//给id为"work"的元素并添加绑定事件和事件处理函数
+            //    me.fireEvent('funwork');
+            //});
+            //Ext.get('study').on('click', function () {
+            //    me.fireEvent('funstudy','日语');
+            //});
+            ////点击capture1按钮后,就会给对象me添加了拦截函数
+            //Ext.get('capture1').on('click', function () {
+            //    Ext.util.Observable.capture(me, function () {
+            //        alert("capture1");//执行拦截时的函数,执行完毕后继续执行被拦截的函数
+            //        return true;//拦截但不终止事件
+            //    })
+            //})
+            ////同capture1,只是会终止事件进行
+            //Ext.get('capture2').on('click', function () {
+            //    Ext.util.Observable.capture(me, function () {
+            //        alert("capture2");//执行完毕后终止被拦截的函数
+            //        return false;//拦截且终止
+            //    })
+            //}) 
+            //Ext.get('releasecapture').on('click', function () {
+            //    Ext.util.Observable.releaseCapture(me);//清除在某个对象上的所有的拦截函数
+            //});
+
+            //Ext.get('suspendEvents').on('click', function () {//暂停某个对象上所有事件的发生
+            //    me.suspendEvents();
+            //});
+            //Ext.get('resumeEvents').on('click', function () {//恢复某个对象上所有事件
+            //    me.resumeEvents();
+            //});
+            //------------------------11、---------------------
+            //alert弹窗中的内容只能用空格使文字居中
+            Ext.Msg.alert("alert", "<p text-align='center'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp如何使内容居中?</p>");
 
         });
     </script>
 
 </head>
-    <body>
-        <script type="text/javascript" src="../examples/shared/examples.js"></script>
-        <!--<button id="test">案例6</button>-->
-        <!--<div id="grid"></div>
+<body>
+    <script type="text/javascript" src="../examples/shared/examples.js"></script>
+    <!--<button id="test">案例6</button>-->
+    <!--<div id="grid"></div>
 
-        <button id="work">work</button>
-        <button id="study">study</button>-->
+    <button id="work">work</button>
+    <button id="study">study</button>-->
+    <!--<input type="text" id="ipt"/>-->
+    <!--<button id="test1">案例6</button>-->
+    <!--<button id="test2">案例9</button>-->
+    <!--------------10--------------->
+    <!--<button id="capture1">拦截事件</button>
+    <button id="capture2">拦截并终止事件</button>
+    <button id="work">work</button>
+    <button id="study">study</button>
+    <button id="releasecapture">release capture</button>
+    <button id="suspendEvents">suspendEvents</button>
+    <button id="resumeEvents">resumeEvents</button>-->
 
-        <!--<input type="text" id="ipt"/>-->
 
-        <!--<button id="test1">案例6</button>-->
-        <!--<button id="test2">案例9</button>-->
 
-        <button id="capture1">拦截事件</button>
-        <button id="capture2">拦截并终止事件</button>
 
-    </body>
+</body>
 </html>

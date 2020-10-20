@@ -9,36 +9,69 @@
         /// <reference path="../ext/ext-all-dev.js" />//智能提示
         Ext.onReady(function () {
             //------------------1------------------
-            var columns = [//注意!!!此处dataIndex该大写的字母必须大写,否则数据无法显示
-                {header:'编号',dataIndex:'id'},
-                {header:'姓名',dataIndex:'name'},
-                {header:'性别',dataIndex:'sex'}
-            ]
-            var data = [
-                ['1','gy','男'],
-                ['2','xm','男'],
-                ['3','ts','女'],
-                ['4','ge','女']
-            ]
+            //var columns = [//注意!!!此处dataIndex该大写的字母必须大写,否则数据无法显示
+            //    {header:'编号',dataIndex:'id'},
+            //    {header:'姓名',dataIndex:'name'},
+            //    {header:'性别',dataIndex:'sex'}
+            //]
+            //var data = [
+            //    ['1','gy','男'],
+            //    ['2','xm','男'],
+            //    ['3','ts','女'],
+            //    ['4','ge','女']
+            //]
             
+            //var store = new Ext.data.ArrayStore({
+            //    //proxy: new Ext.data.ScriptTagProxy({ url: 'http://www.mossle.com/data.json' }),
+            //    //reader: new Ext.data.ArrayReader({}, [
+            //    //    { name: 'id' },
+            //    //    { name: 'name' },
+            //    //    { name: 'sex' }
+            //    //]),
+            //    data: data,
+            //    fields: [
+            //        { name: 'id' },
+            //        { name: 'name' },
+            //        { name: 'sex' }
+            //    ]
+            //});
+            //store.load();
+
+            //var grid = new Ext.grid.GridPanel({
+            //    width:300,
+            //    autoHeight: true,
+            //    renderTo:'grid',
+            //    store: store,
+            //    columns: columns,
+            //    StriprRows: true,
+            //    loadMask:true
+            //})
+
+            //--------------------12设置日期格式,设置表格样式------------------
+            var data = [
+                ['1', 'name1', '男', '1999-01-25'],
+                ['2', 'name2', '女', '1998-02-25'],
+                ['3', 'name3', '男', '1997-03-25'],
+                ['4', 'name4', '女', '1996-04-25']
+            ]
             var store = new Ext.data.ArrayStore({
-                //proxy: new Ext.data.ScriptTagProxy({ url: 'http://www.mossle.com/data.json' }),
-                //reader: new Ext.data.ArrayReader({}, [
-                //    { name: 'id' },
-                //    { name: 'name' },
-                //    { name: 'sex' }
-                //]),
                 data: data,
                 fields: [
                     { name: 'id' },
                     { name: 'name' },
-                    { name: 'sex' }
+                    { name: 'sex' },
+                    { name: 'birthday',type:'data',dataFormat:'Y-m-d' }
                 ]
-            });
+            })
             store.load();
+            var columns = [
+                { header: '编号', dataIndex: 'id' },
+                { header: '名称', dataIndex: 'name' },
+                { header: '性别', dataIndex: 'sex', renderer: renderSex },
+                { header: '生日', dataIndex: 'birthday', renderer: Ext.util.Format.dateRenderer('Y-m-d') }//!!!注意:这里是dateRenderer, 而不是dataRenderer,一定要看清楚date和data
+            ]
 
             var grid = new Ext.grid.GridPanel({
-                width:300,
                 autoHeight: true,
                 renderTo:'grid',
                 store: store,
@@ -46,6 +79,15 @@
                 StriprRows: true,
                 loadMask:true
             })
+
+            function renderSex(value) {
+                if (value == "男") {
+                    return "<span style='color:red;font-weight:bold;'>男</span>";
+                }
+                else {
+                    return "<span style='color:green;font-weight:bold;'>女</span>";
+                }
+            }
         })
         
     </script>

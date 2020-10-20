@@ -7,7 +7,8 @@
     <script type="text/javascript" src="../ext-all.js"></script>
     <script>
         /// <reference path="../ext/ext-all-dev.js" />//智能提示
-        Ext.onReady(function(){
+        Ext.onReady(function () {
+            //------------------1------------------
             var columns = [//注意!!!此处dataIndex该大写的字母必须大写,否则数据无法显示
                 {header:'编号',dataIndex:'id'},
                 {header:'姓名',dataIndex:'name'},
@@ -21,6 +22,12 @@
             ]
             
             var store = new Ext.data.ArrayStore({
+                //proxy: new Ext.data.ScriptTagProxy({ url: 'http://www.mossle.com/data.json' }),
+                //reader: new Ext.data.ArrayReader({}, [
+                //    { name: 'id' },
+                //    { name: 'name' },
+                //    { name: 'sex' }
+                //]),
                 data: data,
                 fields: [
                     { name: 'id' },
@@ -35,7 +42,9 @@
                 autoHeight: true,
                 renderTo:'grid',
                 store: store,
-                columns: columns
+                columns: columns,
+                StriprRows: true,
+                loadMask:true
             })
         })
         

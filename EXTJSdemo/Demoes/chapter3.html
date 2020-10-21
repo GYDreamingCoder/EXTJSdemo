@@ -140,6 +140,14 @@
                 var str = "<input type='button' value='查看详细信息' onclick='alert(\"" + "这个单元格的值是:" + value + "\\n" + "这个单元格对应的record是:" + record + ",一行的数据都在里面 " + "\")'>";
                 return str;
             }
+
+            grid.on('itemclick', function () {//获取选中行信息
+                var selected = grid.getSelectionModel().selected;
+                for (var i = 0; i < selected.getCount(); i++) {
+                    var record = selected.get(i);
+                    Ext.Msg.alert("提示", record.get('id') + "," + record.get('name'));
+                }
+            })
         })
 
     </script>

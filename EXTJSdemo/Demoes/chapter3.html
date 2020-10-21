@@ -96,12 +96,14 @@
                 { header: '详情', dataIndex: 'desc', renderer: getInfo, width: 70 }
             ]
 
+            var sm = new Ext.selection.CheckboxModel({ mode: 'MULTI', checkOnly: false });////复选框,SINGLE为单选,MULTI为多选；checkOnly:true的作用为设置只能点击复选框勾选,点击行不能勾选    
+            var rm = new Ext.selection.RowModel({ singleSelect: true });//禁止按住ctrl或者Shift建同一时间勾选多行
             var grid = new Ext.grid.GridPanel({
                 autoHeight: true,
                 renderTo: 'grid',
                 store: store,
                 columns: columns,
-                selModel: new Ext.selection.CheckboxModel({ mode: 'MULTI', checkOnly: false }),//复选框,SINGLE为单选,MULTI为多选；checkOnly:true的作用为设置只能点击复选框勾选,点击行不能勾选                
+                selModel: sm,            
                 stripeRows: true,//斑马线效果,但经过测验,设不设置此属性表单都会有斑马线效果
                 loadMask: true,//在数据未加载完毕时显示加载动画
                 forceFit: true,//(注意单词的大小写)使行宽自适应页面,如果columns中的指定了width,宽度则会根据width的比例来自适应铺满页面

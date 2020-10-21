@@ -5,6 +5,27 @@
     <title>第三章</title>
     <link href="../resources/css/ext-all.css" rel="stylesheet" />
     <script type="text/javascript" src="../ext-all.js"></script>
+    <style type="text/css">
+        .white-row {
+            background-color: white;
+        }
+
+        .red-row {
+            background-color: #f5c0c0 !important;
+        }
+
+        .yellow-row {
+            background-color: #fbf8bf !important;
+        }
+
+        .green-row {
+            background-color: #99cc99 !important;
+        }
+
+        .x-grid-row .x-grid-cell {
+            background-color: transparent;
+        }
+    </style>
     <script>
         /// <reference path="../ext/ext-all-dev.js" />//智能提示
         Ext.onReady(function () {
@@ -20,7 +41,7 @@
             //    ['3','ts','女'],
             //    ['4','ge','女']
             //]
-            
+
             //var store = new Ext.data.ArrayStore({
             //    //proxy: new Ext.data.ScriptTagProxy({ url: 'http://www.mossle.com/data.json' }),
             //    //reader: new Ext.data.ArrayReader({}, [
@@ -47,40 +68,64 @@
             //    loadMask:true
             //})
 
-            //--------------------12设置日期格式,设置表格样式------------------
-            var data = [
-                ['1', 'name1', '男', '1999-01-25'],
-                ['2', 'name2', '女', '1998-02-25'],
-                ['3', 'name3', '男', '1997-03-25'],
-                ['4', 'name4', '女', '1996-04-25']
+            //--------------------2、grid案例整合------------------
+            var data = [//数据源
+                ['1', 'name1', '男', '1999-01-25', 'desc1', '#FBF8BF'],
+                ['2', 'name2', '女', '1998-02-25', 'desc2', '#99CC99'],
+                ['3', 'name3', '男', '1997-03-25', 'desc3', '#F5C0C0'],
+                ['4', 'name4', '女', '1996-04-25', 'desc4', '#FFFFFF']
             ]
             var store = new Ext.data.ArrayStore({
                 data: data,
-                fields: [
+                fields: [//这里可以绑定数据源中所有的数据而不只限于columns中的数据。
                     { name: 'id' },
                     { name: 'name' },
                     { name: 'sex' },
-                    { name: 'birthday',type:'data',dataFormat:'Y-m-d' }
+                    { name: 'birthday', type: 'data', dataFormat: 'Y-m-d' },
+                    { name: 'desc' },
+                    { name: 'color' }
                 ]
             })
             store.load();
-            var columns = [
-                { header: '编号', dataIndex: 'id' },
-                { header: '名称', dataIndex: 'name' },
-                { header: '性别', dataIndex: 'sex', renderer: renderSex },
-                { header: '生日', dataIndex: 'birthday', renderer: Ext.util.Format.dateRenderer('Y-m-d') }//!!!注意:这里是dateRenderer, 而不是dataRenderer,一定要看清楚date和data
+            var columns = [//columns只代表前台页面显示出来的列,并不能代表store中的所有数据
+                new Ext.grid.RowNumberer(),
+                { header: '编号', dataIndex: 'id', width: 35 },
+                { header: '名称', dataIndex: 'name', width: 60 },
+                { header: '性别', dataIndex: 'sex', renderer: renderSex, width: 50 },
+                { header: '生日', dataIndex: 'birthday', renderer: Ext.util.Format.dateRenderer('Y-m-d'), width: 100 },//!!!注意:这里是dateRenderer, 而不是dataRenderer,一定要看清楚date和data
+                { header: '详情', dataIndex: 'desc', renderer: getInfo, width: 70 }
             ]
 
             var grid = new Ext.grid.GridPanel({
                 autoHeight: true,
-                renderTo:'grid',
+                renderTo: 'grid',
                 store: store,
                 columns: columns,
-                StriprRows: true,
-                loadMask:true
+                selModel: new Ext.selection.CheckboxModel({ mode: 'MULTI', checkOnly: false }),//复选框,SINGLE为单选,MULTI为多选；checkOnly:true的作用为设置只能点击复选框勾选,点击行不能勾选                
+                stripeRows: true,//斑马线效果,但经过测验,设不设置此属性表单都会有斑马线效果
+                loadMask: true,//在数据未加载完毕时显示加载动画
+                forceFit: true,//(注意单词的大小写)使行宽自适应页面,如果columns中的指定了width,宽度则会根据width的比例来自适应铺满页面
+                viewConfig: {// 应用于表格的 UI 视图的配置对象。任何对于Ext.view.Table所使用到的配置选项都在这里被指定
+                    enableRowBody: true,
+                    getRowClass: function (record, rowIndex, p, ds) {//设置行的背景颜色
+                        var cls = 'white-row';
+                        switch (record.data.color) {
+                            case '#FBF8BF': cls = "yellow-row"; break;
+                            case '#99CC99': cls = "green-row"; break;
+                            case '#F5C0C0': cls = "red-row"; break;
+                            default:
+                        }
+                        return cls;
+                    }
+                }
             })
 
-            function renderSex(value) {
+            Ext.get("btn_remove").on('click', function () {
+                store.remove(store.getAt(1));//点击按钮删除第二行
+                grid.view.refresh();//经测验,无法实现重新编号的功能,行编号依然会断掉。
+            })
+
+            function renderSex(value) {//给性别字段设置颜色
                 if (value == "男") {
                     return "<span style='color:red;font-weight:bold;'>男</span>";
                 }
@@ -88,11 +133,17 @@
                     return "<span style='color:green;font-weight:bold;'>女</span>";
                 }
             }
+
+            function getInfo(value, cellmeta, record, rowIndex, columnIndex, store) {//点击按钮查看详细信息
+                var str = "<input type='button' value='查看详细信息' onclick='alert(\"" + "这个单元格的值是:" + value + "\\n" + "这个单元格对应的record是:" + record + ",一行的数据都在里面 " + "\")'>";
+                return str;
+            }
         })
-        
+
     </script>
 </head>
 <body>
     <div id="grid"></div>
+    <button id="btn_remove">删除</button>
 </body>
 </html>

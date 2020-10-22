@@ -28,8 +28,12 @@
     </style>
     <script>
         /// <reference path="../ext/ext-all-dev.js" />//智能提示
+
+        Ext.Loader.setPath('Ext.ux', '../examples/ux');
+        Ext.require('Ext.ux.data.PagingMemoryProxy');
+
         Ext.onReady(function () {
-            //------------------1------------------
+            //------------------壹、简单示例------------------
             //var columns = [//注意!!!此处dataIndex该大写的字母必须大写,否则数据无法显示
             //    {header:'编号',dataIndex:'id'},
             //    {header:'姓名',dataIndex:'name'},
@@ -68,16 +72,181 @@
             //    loadMask:true
             //})
 
-            //--------------------2、grid案例整合------------------
+            //--------------------二、grid案例整合------------------
+            //var data = [//数据源
+            //    ['1', 'name1', '男', '1999-01-25', 'desc1', '#FBF8BF'],
+            //    ['2', 'name2', '女', '1998-02-25', 'desc2', '#99CC99'],
+            //    ['3', 'name3', '男', '1997-03-25', 'desc3', '#F5C0C0'],
+            //    ['4', 'name4', '女', '1996-04-25', 'desc4', '#FFFFFF']
+            //]
+
+            ////定义个model类,用于代替fields
+            //Ext.define('User', {//Model中可以写属性和方法
+            //    extend: 'Ext.data.Model',
+            //    fields: [
+            //        { name: 'id' },
+            //        { name: 'name' },
+            //        { name: 'sex' },
+            //        { name: 'birthday', type: 'data', dataFormat: 'Y-m-d' },
+            //        { name: 'desc' },
+            //        { name: 'color' }
+            //    ],
+            //    changeName: function (newName) {
+            //        var oldName = this.get('name'),
+            //            newName = oldName + "-" + newName;
+            //        this.set('name', newName);
+            //    }
+            //})
+
+            //var store = new Ext.data.ArrayStore({
+            //    data: data,
+            //    //fields: [//这里可以绑定数据源中所有的数据而不只限于columns中的数据,在这里绑定的数据都可以通过record.data访问到。
+            //    //    { name: 'id' },
+            //    //    { name: 'name' },
+            //    //    { name: 'sex' },
+            //    //    { name: 'birthday', type: 'data', dataFormat: 'Y-m-d' },
+            //    //    { name: 'desc' },
+            //    //    { name: 'color' }
+            //    //]
+            //    model:'User'//model可以代替field
+            //})
+            //store.load();
+            //var columns = [//columns只代表前台页面显示出来的列,并不能代表store中的所有数据
+            //    new Ext.grid.RowNumberer(),
+            //    { header: '编号', dataIndex: 'id', width: 35 },
+            //    { header: '名称', dataIndex: 'name', width: 60 },
+            //    { header: '性别', dataIndex: 'sex', renderer: renderSex, width: 50 },
+            //    { header: '生日', dataIndex: 'birthday', renderer: Ext.util.Format.dateRenderer('Y-m-d'), width: 100 },//!!!注意:这里是dateRenderer, 而不是dataRenderer,一定要看清楚date和data
+            //    { header: '详情', dataIndex: 'desc', renderer: getInfo, width: 70 }
+            //]
+
+            
+            //var sm = new Ext.selection.CheckboxModel({ mode: 'MULTI', checkOnly: false });////复选框,SINGLE为单选,MULTI为多选；checkOnly:true的作用为设置只能点击复选框勾选,点击行不能勾选    
+            //var rm = new Ext.selection.RowModel({ singleSelect: true });//禁止按住ctrl或者Shift建同一时间勾选多行
+            //var grid = new Ext.grid.GridPanel({
+            //    autoHeight: true,
+            //    renderTo: 'grid',
+            //    store: store,
+            //    columns: columns,
+            //    selModel: sm,            
+            //    stripeRows: true,//斑马线效果,但经过测验,设不设置此属性表单都会有斑马线效果
+            //    loadMask: true,//在数据未加载完毕时显示加载动画
+            //    forceFit: true,//(注意单词的大小写)使行宽自适应页面,如果columns中的指定了width,宽度则会根据width的比例来自适应铺满页面
+            //    viewConfig: {// 应用于表格的 UI 视图的配置对象。任何对于Ext.view.Table所使用到的配置选项都在这里被指定
+            //        enableRowBody: true,
+            //        getRowClass: function (record, rowIndex, p, ds) {//设置行的背景颜色
+            //            var cls = 'white-row';
+            //            switch (record.data.color) {
+            //                case '#FBF8BF': cls = "yellow-row"; break;
+            //                case '#99CC99': cls = "green-row"; break;
+            //                case '#F5C0C0': cls = "red-row"; break;
+            //                default:
+            //            }
+            //            return cls;
+            //        }
+            //    }
+            //})
+
+            //Ext.get("btn_remove").on('click', function () {
+            //    store.remove(store.getAt(1));//点击按钮删除第二行
+            //    grid.view.refresh();//经测验,无法实现重新编号的功能,行编号依然会断掉。
+            //})
+
+            //function renderSex(value) {//给性别字段设置颜色
+            //    if (value == "男") {
+            //        return "<span style='color:red;font-weight:bold;'>男</span>";
+            //    }
+            //    else {
+            //        return "<span style='color:green;font-weight:bold;'>女</span>";
+            //    }
+            //}
+
+            //function getInfo(value, cellmeta, record, rowIndex, columnIndex, store) {//点击按钮查看详细信息
+            //    var str = "<input type='button' value='查看详细信息' onclick='alert(\"" + "这个单元格的值是:" + value + "\\n" + "这个单元格对应的record是:" + record + ",一行的数据都在里面 " + "\")'>";
+            //    return str;
+            //}
+
+            //grid.on('itemclick', function () {//获取选中行信息
+            //    var selected = grid.getSelectionModel().selected;
+            //    for (var i = 0; i < selected.getCount(); i++) {
+            //        var record = selected.get(i);
+            //        Ext.Msg.alert("提示", record.get('id') + "," + record.get('name'));
+            //    }
+            //})
+
+            //--------------------三、grid案例整合(2)【书3.8节以后】------------------
+
+            //var columns = [
+            //    { header: '编号', dataIndex: 'id', name: 'id'},
+            //    { header: '名称', dataIndex: 'name', name: 'name' },
+            //    { header: '性别', dataIndex: 'sex', name: 'sex'},
+            //    { header: '生日', dataIndex: 'birthday', name: 'birthday'},
+            //    { header: '详情', dataIndex: 'desc', name: 'desc' }
+            //]
+
+            //var data = [//数据源
+            //    ['1', 'name1', '男', '1999-01-25', 'desc1','#FBF8BF'],
+            //    ['2', 'name2', '女', '1998-02-25', 'desc2','#99CC99'],
+            //    ['3', 'name3', '男', '1997-03-25', 'desc3','#F5C0C0'],
+            //    ['4', 'name4', '女', '1996-04-25', 'desc4', '#FFFFFF'],
+            //]
+
+            //var grid = new Ext.grid.GridPanel({
+            //    height:80,
+            //    renderTo: 'grid',
+            //    store: new Ext.data.ArrayStore({
+            //        data: data,
+            //        fields: columns,//(注意：此种写法必须在columns中指定name属性,否则无法显示)将显示列的数据绑定到store中,这样虽然写法变简洁了,
+            //                        //但是后面就不能通过record.data访问到不在columns中的数据了, 例如data中的最后一列表示颜色的字段。
+            //        autoLoad: true
+            //    }),
+            //    columns: columns,
+            //    forceFit: true,
+            //    viewConfig: {
+            //        columnsText: '显示的列',
+            //        scrollOffset: 30,
+            //        sortAscText: '升序',
+            //        sortDescText: '降序',
+            //        //forceFit: true//经测验,forceFit设置在这里并不会使列宽自适应占满屏幕
+            //    }             
+            //})
+
+            //-----------------------------四、表格分页：(1)从后台读取分页数据【提升性能】(2)一次性读取后台所有数到前台,在前台进行分页【适用于少量数据】-----------------------
+
+            //---------------（1）前台分页【记得引用：Ext.Loader.setPath('Ext.ux', '../examples/ux');Ext.require('Ext.ux.data.PagingMemoryProxy');】---------------------------------
+            var columns = [
+                { header: '编号', dataIndex: 'id', name: 'id' },
+                { header: '名称', dataIndex: 'name', name: 'name' },
+                { header: '性别', dataIndex: 'sex', name: 'sex' },
+                { header: '生日', dataIndex: 'birthday', name: 'birthday' },
+                { header: '详情', dataIndex: 'desc', name: 'desc' }
+            ]
+
             var data = [//数据源
                 ['1', 'name1', '男', '1999-01-25', 'desc1', '#FBF8BF'],
                 ['2', 'name2', '女', '1998-02-25', 'desc2', '#99CC99'],
                 ['3', 'name3', '男', '1997-03-25', 'desc3', '#F5C0C0'],
-                ['4', 'name4', '女', '1996-04-25', 'desc4', '#FFFFFF']
+                ['4', 'name4', '女', '1996-04-25', 'desc4', '#FFFFFF'],
+                ['5', 'name5', '男', '1999-01-25', 'desc1', '#FBF8BF'],
+                ['6', 'name6', '女', '1998-02-25', 'desc2', '#99CC99'],
+                ['7', 'name7', '男', '1997-03-25', 'desc3', '#F5C0C0'],
+                ['8', 'name8', '女', '1996-04-25', 'desc4', '#FFFFFF'],
+                ['9', 'name9', '男', '1999-01-25', 'desc1', '#FBF8BF'],
+                ['10', 'name10', '女', '1998-02-25', 'desc2', '#99CC99'],
+                ['11', 'name11', '男', '1997-03-25', 'desc3', '#F5C0C0'],
+                ['12', 'name12', '女', '1996-04-25', 'desc4', '#FFFFFF']
             ]
+
             var store = new Ext.data.ArrayStore({
-                data: data,
-                fields: [//这里可以绑定数据源中所有的数据而不只限于columns中的数据。
+                pageSize: 3,
+                proxy: {
+                    type: 'pagingmemory',
+                    data: data,
+                    reader: {
+                        type: 'array'
+                    }
+                },
+                fields: [//这里可以绑定数据源中所有的数据而不只限于columns中的数据,在这里绑定的数据都可以通过record.data访问到。
                     { name: 'id' },
                     { name: 'name' },
                     { name: 'sex' },
@@ -86,68 +255,32 @@
                     { name: 'color' }
                 ]
             })
-            store.load();
-            var columns = [//columns只代表前台页面显示出来的列,并不能代表store中的所有数据
-                new Ext.grid.RowNumberer(),
-                { header: '编号', dataIndex: 'id', width: 35 },
-                { header: '名称', dataIndex: 'name', width: 60 },
-                { header: '性别', dataIndex: 'sex', renderer: renderSex, width: 50 },
-                { header: '生日', dataIndex: 'birthday', renderer: Ext.util.Format.dateRenderer('Y-m-d'), width: 100 },//!!!注意:这里是dateRenderer, 而不是dataRenderer,一定要看清楚date和data
-                { header: '详情', dataIndex: 'desc', renderer: getInfo, width: 70 }
-            ]
 
-            var sm = new Ext.selection.CheckboxModel({ mode: 'MULTI', checkOnly: false });////复选框,SINGLE为单选,MULTI为多选；checkOnly:true的作用为设置只能点击复选框勾选,点击行不能勾选    
-            var rm = new Ext.selection.RowModel({ singleSelect: true });//禁止按住ctrl或者Shift建同一时间勾选多行
             var grid = new Ext.grid.GridPanel({
                 autoHeight: true,
                 renderTo: 'grid',
-                store: store,
                 columns: columns,
-                selModel: sm,            
-                stripeRows: true,//斑马线效果,但经过测验,设不设置此属性表单都会有斑马线效果
-                loadMask: true,//在数据未加载完毕时显示加载动画
-                forceFit: true,//(注意单词的大小写)使行宽自适应页面,如果columns中的指定了width,宽度则会根据width的比例来自适应铺满页面
-                viewConfig: {// 应用于表格的 UI 视图的配置对象。任何对于Ext.view.Table所使用到的配置选项都在这里被指定
-                    enableRowBody: true,
-                    getRowClass: function (record, rowIndex, p, ds) {//设置行的背景颜色
-                        var cls = 'white-row';
-                        switch (record.data.color) {
-                            case '#FBF8BF': cls = "yellow-row"; break;
-                            case '#99CC99': cls = "green-row"; break;
-                            case '#F5C0C0': cls = "red-row"; break;
-                            default:
-                        }
-                        return cls;
-                    }
-                }
-            })
+                forceFit: true,
+                store: store,
+                viewConfig: {
+                    columnsText: '显示的列',
+                    scrollOffset: 30,
+                    sortAscText: '升序',
+                    sortDescText: '降序',
+                    //forceFit: true//经测验,forceFit设置在这里并不会使列宽自适应占满屏幕
+                },
+                bbar: new Ext.PagingToolbar({
+                    pageSize: 3,
+                    store: store,
+                    displayInfo: true,
+                    displayMsg: '显示第{0}条到{1}记录,一共{2}条记录',
+                    emptyMsg: "没有记录"
+                })
+            });
+            store.load({ params: { start: 0, limit: 3 } });//当指定分页时,store.load()必须在grid构造完成后执行
 
-            Ext.get("btn_remove").on('click', function () {
-                store.remove(store.getAt(1));//点击按钮删除第二行
-                grid.view.refresh();//经测验,无法实现重新编号的功能,行编号依然会断掉。
-            })
+                  //---------------（2）后台实现分页---------------------------------
 
-            function renderSex(value) {//给性别字段设置颜色
-                if (value == "男") {
-                    return "<span style='color:red;font-weight:bold;'>男</span>";
-                }
-                else {
-                    return "<span style='color:green;font-weight:bold;'>女</span>";
-                }
-            }
-
-            function getInfo(value, cellmeta, record, rowIndex, columnIndex, store) {//点击按钮查看详细信息
-                var str = "<input type='button' value='查看详细信息' onclick='alert(\"" + "这个单元格的值是:" + value + "\\n" + "这个单元格对应的record是:" + record + ",一行的数据都在里面 " + "\")'>";
-                return str;
-            }
-
-            grid.on('itemclick', function () {//获取选中行信息
-                var selected = grid.getSelectionModel().selected;
-                for (var i = 0; i < selected.getCount(); i++) {
-                    var record = selected.get(i);
-                    Ext.Msg.alert("提示", record.get('id') + "," + record.get('name'));
-                }
-            })
         })
 
     </script>

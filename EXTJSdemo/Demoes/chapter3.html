@@ -214,39 +214,111 @@
             //-----------------------------四、表格分页：(1)从后台读取分页数据【提升性能】(2)一次性读取后台所有数到前台,在前台进行分页【适用于少量数据】-----------------------
 
             //---------------（1）前台分页【记得引用：Ext.Loader.setPath('Ext.ux', '../examples/ux');Ext.require('Ext.ux.data.PagingMemoryProxy');】---------------------------------
+            //var columns = [
+            //    { header: '编号', dataIndex: 'id', name: 'id' },
+            //    { header: '名称', dataIndex: 'name', name: 'name' },
+            //    { header: '性别', dataIndex: 'sex', name: 'sex' },
+            //    { header: '生日', dataIndex: 'birthday', name: 'birthday' },
+            //    { header: '详情', dataIndex: 'desc', name: 'desc' }
+            //]
+
+            //var data = [//数据源
+            //    ['1', 'name1', '男', '1999-01-25', 'desc1', '#FBF8BF'],
+            //    ['2', 'name2', '女', '1998-02-25', 'desc2', '#99CC99'],
+            //    ['3', 'name3', '男', '1997-03-25', 'desc3', '#F5C0C0'],
+            //    ['4', 'name4', '女', '1996-04-25', 'desc4', '#FFFFFF'],
+            //    ['5', 'name5', '男', '1999-01-25', 'desc1', '#FBF8BF'],
+            //    ['6', 'name6', '女', '1998-02-25', 'desc2', '#99CC99'],
+            //    ['7', 'name7', '男', '1997-03-25', 'desc3', '#F5C0C0'],
+            //    ['8', 'name8', '女', '1996-04-25', 'desc4', '#FFFFFF'],
+            //    ['9', 'name9', '男', '1999-01-25', 'desc1', '#FBF8BF'],
+            //    ['10', 'name10', '女', '1998-02-25', 'desc2', '#99CC99'],
+            //    ['11', 'name11', '男', '1997-03-25', 'desc3', '#F5C0C0'],
+            //    ['12', 'name12', '女', '1996-04-25', 'desc4', '#FFFFFF']
+            //]
+
+            //var store = new Ext.data.ArrayStore({
+            //    pageSize: 3,
+            //    proxy: {
+            //        type: 'pagingmemory',
+            //        data: data,
+            //        reader: {
+            //            type: 'array'
+            //        }
+            //    },
+            //    fields: [//这里可以绑定数据源中所有的数据而不只限于columns中的数据,在这里绑定的数据都可以通过record.data访问到。
+            //        { name: 'id' },
+            //        { name: 'name' },
+            //        { name: 'sex' },
+            //        { name: 'birthday', type: 'data', dataFormat: 'Y-m-d' },
+            //        { name: 'desc' },
+            //        { name: 'color' }
+            //    ]
+            //})
+
+            //var grid = new Ext.grid.GridPanel({
+            //    autoHeight: true,
+            //    renderTo: 'grid',
+            //    columns: columns,
+            //    forceFit: true,
+            //    store: store,
+            //    viewConfig: {
+            //        columnsText: '显示的列',
+            //        scrollOffset: 30,
+            //        sortAscText: '升序',
+            //        sortDescText: '降序',
+            //        //forceFit: true//经测验,forceFit设置在这里并不会使列宽自适应占满屏幕
+            //    },
+            //    bbar: new Ext.PagingToolbar({
+            //        pageSize: 3,
+            //        store: store,
+            //        displayInfo: true,
+            //        displayMsg: '显示第{0}条到{1}记录,一共{2}条记录',
+            //        emptyMsg: "没有记录"
+            //    })
+            //});
+            //store.load({ params: { start: 0, limit: 3 } });//当指定分页时,store.load()必须在grid构造完成后执行
+
+            //      //---------------（2）后台实现分页---------------------------------
+
+
+
+            //---------------------------五、可编辑表格控件EditorGrid--------------------------
+            var comboData = ["湖北", "广东", "湖南", "海外"];
+
             var columns = [
-                { header: '编号', dataIndex: 'id', name: 'id' },
-                { header: '名称', dataIndex: 'name', name: 'name' },
-                { header: '性别', dataIndex: 'sex', name: 'sex' },
-                { header: '生日', dataIndex: 'birthday', name: 'birthday' },
-                { header: '详情', dataIndex: 'desc', name: 'desc' }
+                { header: '编号', dataIndex: 'id', editor: new Ext.form.NumberField({ allowNegative:false,maxValue:1000,allowBlank: false }) },//allowBlank：允许单元格为空
+                { header: '名称', dataIndex: 'name',editor: { allowBlank: true } },
+                { header: '性别', dataIndex: 'sex', editor: { allowBlank: false }},
+                { header: '生日', dataIndex: 'birthday' },
+                {
+                    header: '籍贯', dataIndex: 'form', editor: new Ext.form.ComboBox({
+                        store: new Ext.data.SimpleStore({
+                            fields: ['value', 'text'],
+                            data:comboData
+                        }),
+                        empty: '请选择',
+                        model: 'local',
+                        triggerAction: "all",
+                        valueField: "value",
+                        displayField: "text",
+                        eidtable: false
+                    })
+                },
+                { header: '详情', dataIndex: 'desc' }
             ]
 
-            var data = [//数据源
+            var data = [
                 ['1', 'name1', '男', '1999-01-25', 'desc1', '#FBF8BF'],
                 ['2', 'name2', '女', '1998-02-25', 'desc2', '#99CC99'],
                 ['3', 'name3', '男', '1997-03-25', 'desc3', '#F5C0C0'],
                 ['4', 'name4', '女', '1996-04-25', 'desc4', '#FFFFFF'],
-                ['5', 'name5', '男', '1999-01-25', 'desc1', '#FBF8BF'],
-                ['6', 'name6', '女', '1998-02-25', 'desc2', '#99CC99'],
-                ['7', 'name7', '男', '1997-03-25', 'desc3', '#F5C0C0'],
-                ['8', 'name8', '女', '1996-04-25', 'desc4', '#FFFFFF'],
-                ['9', 'name9', '男', '1999-01-25', 'desc1', '#FBF8BF'],
-                ['10', 'name10', '女', '1998-02-25', 'desc2', '#99CC99'],
-                ['11', 'name11', '男', '1997-03-25', 'desc3', '#F5C0C0'],
-                ['12', 'name12', '女', '1996-04-25', 'desc4', '#FFFFFF']
             ]
 
             var store = new Ext.data.ArrayStore({
                 pageSize: 3,
-                proxy: {
-                    type: 'pagingmemory',
-                    data: data,
-                    reader: {
-                        type: 'array'
-                    }
-                },
-                fields: [//这里可以绑定数据源中所有的数据而不只限于columns中的数据,在这里绑定的数据都可以通过record.data访问到。
+                data: data,
+                fields: [
                     { name: 'id' },
                     { name: 'name' },
                     { name: 'sex' },
@@ -256,31 +328,63 @@
                 ]
             })
 
+            var sm = new Ext.selection.CheckboxModel({ mode: 'MULTI', checkOnly: false });////复选框,SINGLE为单选,MULTI为多选；checkOnly:true的作用为设置只能点击复选框勾选,点击行不能勾选    
             var grid = new Ext.grid.GridPanel({
                 autoHeight: true,
                 renderTo: 'grid',
                 columns: columns,
                 forceFit: true,
                 store: store,
-                viewConfig: {
-                    columnsText: '显示的列',
-                    scrollOffset: 30,
-                    sortAscText: '升序',
-                    sortDescText: '降序',
-                    //forceFit: true//经测验,forceFit设置在这里并不会使列宽自适应占满屏幕
-                },
-                bbar: new Ext.PagingToolbar({
-                    pageSize: 3,
-                    store: store,
-                    displayInfo: true,
-                    displayMsg: '显示第{0}条到{1}记录,一共{2}条记录',
-                    emptyMsg: "没有记录"
-                })
+                selModel:sm,
+                selType: 'cellmodel',
+                plugins: [
+                    Ext.create('Ext.grid.plugin.CellEditing', {//指定单元格编辑控件
+                        clicksToEdit:1//点击一次单元格即可编辑单元格
+                    })
+                ],
+                tbar: ['-', {
+                    text: '添加一行',
+                    handler: function () {
+                        var newRow = {
+                            id: '',
+                            name: '',
+                            sex: '',
+                            birthday:'',
+                            desc: ''
+                        }
+                        store.insert(0, newRow);
+                    }
+                }, '-', {
+                        text: '批量删除',//【注意！！！】删除按钮要配合复选框一起使用，否则无法进行删除
+                        handler: function () {
+                            Ext.Msg.confirm('提示', "你确定要删除该行吗", function (btn) {
+                                if (btn == "yes") {
+                                    //提示：
+                                    //grid.getSelectionModel().getSelected();//获取选中的第一条记录,返回record类型
+                                    //grid.getSelectionModel().getSelections();//获取选中的全部记录,返回一个数组,里面全是record类型
+                                    //grid.store.remove(record);//参数是record类型的,移除该数据
+                                    //grid.store.removeAt(rowIndex);//参数是行数,移除该行
+                                    //grid.store.removeAll();//移除全部数据
+                                    var sm = grid.getSelectionModel();
+                                    var len = sm.getSelection().length;
+                                    for (var i = 0; i <len ; i++) {
+                                    var record = sm.getSelection()[0];
+                                    store.remove(record);
+                                    }
+                                }
+                            })
+                        }
+                    }, '-', {
+                        text: '保存',//涉及后台,暂不编写
+                        handler: function () {
+                            var m = store.getModifiedRecords().slice(0);
+                            var jsonArray = [];
+                            Ext.each(m, function (item) {
+                                jsonArray.push(item.data);
+                            })
+                        }
+                    }]
             });
-            store.load({ params: { start: 0, limit: 3 } });//当指定分页时,store.load()必须在grid构造完成后执行
-
-                  //---------------（2）后台实现分页---------------------------------
-
         })
 
     </script>

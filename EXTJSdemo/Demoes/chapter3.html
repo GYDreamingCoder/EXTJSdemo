@@ -284,107 +284,157 @@
 
 
             //---------------------------五、可编辑表格控件EditorGrid--------------------------
-            var comboData = ["湖北", "广东", "湖南", "海外"];
+            //var comboData = [[0,"请选择"],[1,"湖北"], [2,"广东"], [3,"湖南"], [4,"海外"]];
 
-            var columns = [
-                { header: '编号', dataIndex: 'id', editor: new Ext.form.NumberField({ allowNegative:false,maxValue:1000,allowBlank: false }) },//allowBlank：允许单元格为空
-                { header: '名称', dataIndex: 'name',editor: { allowBlank: true } },
-                { header: '性别', dataIndex: 'sex', editor: { allowBlank: false }},
-                { header: '生日', dataIndex: 'birthday' },
-                {
-                    header: '籍贯', dataIndex: 'form', editor: new Ext.form.ComboBox({
-                        store: new Ext.data.SimpleStore({
-                            fields: ['value', 'text'],
-                            data:comboData
-                        }),
-                        empty: '请选择',
-                        model: 'local',
-                        triggerAction: "all",
-                        valueField: "value",
-                        displayField: "text",
-                        eidtable: false
-                    })
-                },
-                { header: '详情', dataIndex: 'desc' }
-            ]
+            //var columns = [
+            //    { header: '编号', dataIndex: 'id', editor: new Ext.form.NumberField({ allowNegative:false,maxValue:1000,allowBlank: false }) },//allowBlank：允许单元格为空
+            //    { header: '名称', dataIndex: 'name',editor: { allowBlank: true } },
+            //    {
+            //        header: '性别', dataIndex: 'sex', editor: new Ext.form.Checkbox({//只有一个勾选框
+            //            allowBlank:false
+            //        }),
+            //        renderer: function (value) {//勾选为"男",不勾选为"女"
+            //            return value ? '男' : '女';
+            //        }
+            //    },
+            //    {
+            //        header: '生日', dataIndex: 'birthday', editor: new Ext.form.DateField({//【注意！！！】不要把Date写成Data
+            //            format: 'Y-m-d',
+            //            minValue: "1900-01-01",
+            //            disabledDays: [0, 6],//0为星期天
+            //            disabledDaysText:'只能选择工作日'
+            //        }),
+            //        renderer: function (value) {
+            //            return Ext.Date.format(value, 'Y-m-d');//【注意！！！】不要把Date写成Data
+            //        }
+            //    },
+            //    {
+            //        header: '籍贯', dataIndex: 'from', editor: new Ext.form.ComboBox({
+            //            store: new Ext.data.SimpleStore({
+            //                fields: ['value', 'text'],
+            //                data:comboData
+            //            }),
+            //            emptyText: '请选择',
+            //            model: 'local',
+            //            triggerAction: "all",
+            //            valueField: 'value',
+            //            displayField: "text",
+            //            eidtable: false
+            //        }),
+            //        renderer: function (value) {//【注意！！！】这里的value的值是从下面data数组的倒数第二列拿到的，所以在初始化时必须要设定一个初始值。
+            //            return comboData[value][1];
+            //        }
+            //    },
+            //    { header: '详情', dataIndex: 'desc' }
+            //]
 
-            var data = [
-                ['1', 'name1', '男', '1999-01-25', 'desc1', '#FBF8BF'],
-                ['2', 'name2', '女', '1998-02-25', 'desc2', '#99CC99'],
-                ['3', 'name3', '男', '1997-03-25', 'desc3', '#F5C0C0'],
-                ['4', 'name4', '女', '1996-04-25', 'desc4', '#FFFFFF'],
-            ]
+            //var data = [
+            //    ['1', 'name1', true, new Date(), 0, 'desc1', '#FBF8BF'],
+            //    ['2', 'name2', true, new Date(), 0, 'desc2', '#99CC99'],
+            //    ['3', 'name3', true, new Date(), 0, 'desc3', '#F5C0C0'],
+            //    ['4', 'name4', true, new Date(), 0, 'desc4', '#FFFFFF']
+            //]    
 
-            var store = new Ext.data.ArrayStore({
-                pageSize: 3,
-                data: data,
-                fields: [
-                    { name: 'id' },
-                    { name: 'name' },
-                    { name: 'sex' },
-                    { name: 'birthday', type: 'data', dataFormat: 'Y-m-d' },
-                    { name: 'desc' },
-                    { name: 'color' }
-                ]
-            })
+            //var store = new Ext.data.ArrayStore({
+            //    pageSize: 3,
+            //    data: data,
+            //    fields: [
+            //        { name: 'id' },
+            //        { name: 'name' },
+            //        { name: 'sex' },
+            //        { name: 'birthday', type: 'data', dataFormat: 'Y-m-d' },
+            //        { name: 'from' },
+            //        { name: 'desc' },
+            //        { name: 'color' }
+            //    ]
+            //})
 
-            var sm = new Ext.selection.CheckboxModel({ mode: 'MULTI', checkOnly: false });////复选框,SINGLE为单选,MULTI为多选；checkOnly:true的作用为设置只能点击复选框勾选,点击行不能勾选    
-            var grid = new Ext.grid.GridPanel({
+            //var sm = new Ext.selection.CheckboxModel({ mode: 'MULTI', checkOnly: false });////复选框,SINGLE为单选,MULTI为多选；checkOnly:true的作用为设置只能点击复选框勾选,点击行不能勾选    
+            //var grid = new Ext.grid.GridPanel({
+            //    autoHeight: true,
+            //    renderTo: 'grid',
+            //    columns: columns,
+            //    forceFit: true,
+            //    store: store,
+            //    selModel:sm,
+            //    selType: 'cellmodel',
+            //    plugins: [
+            //        Ext.create('Ext.grid.plugin.CellEditing', {//指定单元格编辑控件
+            //            clicksToEdit:1//点击一次单元格即可编辑单元格
+            //        })
+            //    ],
+            //    tbar: ['-', {
+            //        text: '添加一行',
+            //        handler: function () {
+            //            var newRow = {
+            //                id: '',
+            //                name: '',
+            //                sex: '',
+            //                birthday: '',
+            //                from:0,
+            //                desc: 'descxx'
+            //            }
+            //            store.insert(0, newRow);
+            //        }
+            //    }, '-', {
+            //            text: '批量删除',//【注意！！！】删除按钮要配合复选框一起使用，否则无法进行删除
+            //            handler: function () {
+            //                Ext.Msg.confirm('提示', "你确定要删除该行吗", function (btn) {
+            //                    if (btn == "yes") {
+            //                        //提示：
+            //                        //grid.getSelectionModel().getSelected();//获取选中的第一条记录,返回record类型
+            //                        //grid.getSelectionModel().getSelections();//获取选中的全部记录,返回一个数组,里面全是record类型
+            //                        //grid.store.remove(record);//参数是record类型的,移除该数据
+            //                        //grid.store.removeAt(rowIndex);//参数是行数,移除该行
+            //                        //grid.store.removeAll();//移除全部数据
+            //                        var sm = grid.getSelectionModel();
+            //                        var len = sm.getSelection().length;
+            //                        for (var i = 0; i <len ; i++) {
+            //                        var record = sm.getSelection()[0];
+            //                        store.remove(record);
+            //                        }
+            //                    }
+            //                })
+            //            }
+            //        }, '-', {
+            //            text: '保存',//涉及后台,暂不编写
+            //            handler: function () {
+            //                var m = store.getModifiedRecords().slice(0);
+            //                var jsonArray = [];
+            //                Ext.each(m, function (item) {
+            //                    jsonArray.push(item.data);
+            //                })
+            //            }
+            //        }]
+            //});
+
+            //---------------------------------六、属性表格控件---------------------------
+
+            var grid = new Ext.grid.PropertyGrid({
+                title: '个人信息',
                 autoHeight: true,
+                width: 300,
                 renderTo: 'grid',
-                columns: columns,
-                forceFit: true,
-                store: store,
-                selModel:sm,
-                selType: 'cellmodel',
-                plugins: [
-                    Ext.create('Ext.grid.plugin.CellEditing', {//指定单元格编辑控件
-                        clicksToEdit:1//点击一次单元格即可编辑单元格
-                    })
-                ],
-                tbar: ['-', {
-                    text: '添加一行',
-                    handler: function () {
-                        var newRow = {
-                            id: '',
-                            name: '',
-                            sex: '',
-                            birthday:'',
-                            desc: ''
-                        }
-                        store.insert(0, newRow);
-                    }
-                }, '-', {
-                        text: '批量删除',//【注意！！！】删除按钮要配合复选框一起使用，否则无法进行删除
-                        handler: function () {
-                            Ext.Msg.confirm('提示', "你确定要删除该行吗", function (btn) {
-                                if (btn == "yes") {
-                                    //提示：
-                                    //grid.getSelectionModel().getSelected();//获取选中的第一条记录,返回record类型
-                                    //grid.getSelectionModel().getSelections();//获取选中的全部记录,返回一个数组,里面全是record类型
-                                    //grid.store.remove(record);//参数是record类型的,移除该数据
-                                    //grid.store.removeAt(rowIndex);//参数是行数,移除该行
-                                    //grid.store.removeAll();//移除全部数据
-                                    var sm = grid.getSelectionModel();
-                                    var len = sm.getSelection().length;
-                                    for (var i = 0; i <len ; i++) {
-                                    var record = sm.getSelection()[0];
-                                    store.remove(record);
-                                    }
-                                }
-                            })
-                        }
-                    }, '-', {
-                        text: '保存',//涉及后台,暂不编写
-                        handler: function () {
-                            var m = store.getModifiedRecords().slice(0);
-                            var jsonArray = [];
-                            Ext.each(m, function (item) {
-                                jsonArray.push(item.data);
-                            })
-                        }
-                    }]
-            });
+                viewConfig: {
+                    forceFit: true
+                },
+                source: {//可以根据数据类型自动默认的编辑器,例如date类型默认选用日期控件
+                    "编号": 0,
+                    "名字": "newName",
+                    "性别": '女',
+                    "生日": new Date(Date.parse('2-25-1999'))
+                }
+            })
+            //grid.on("beforeedit", function (e) {//属性表格变为只读
+            //    e.cancle = true;
+            //    return false;
+            //});
+
+            //-------------------------------七、表格分组控件----------------------------
+
+
+
+            //--------------------------------八、可拖放表格---------------------------------
         })
 
     </script>

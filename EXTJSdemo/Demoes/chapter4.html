@@ -6,21 +6,193 @@
     <link href="../resources/css/ext-all.css" rel="stylesheet" />
     <script type="text/javascript" src="../ext-all.js"></script>
     <script>
-        var form = new Ext.form.FormPanel({
-            title: '表单一',
-            defaultType: 'textfield',
-            buttonAlign: 'center',
-            frame: true,
-            width: 220,
-            fieldDefaults: {
-                labelAlign: 'right',
-                labelWidth: 70,
-            },
-            items: [{fieldLabel: '文本框',}],
-            buttons: [{text:'按钮'}]
-        })
-        form.render("form");
+        Ext.onReady(function () {
+            //-----------------------基本表单------------------------------------
+            //var form = new Ext.form.FormPanel({
+            //    title: '表单一',
+            //    defaultType: 'checkbox',//指定当前容器的默认子组件，参数参照：blog.csdn.net/lv_shijun/article/details/90234302，例如：checkbox，textfield，numberfield，buton，label，hidden，displayfield
+            //    buttonAlign: 'center',
+            //    frame: true,
+            //    width: 220,
+            //    fieldDefaults: {
+            //        labelAlign: 'right',
+            //        labelWidth: 70,
+            //    },
+            //    items: [{ fieldLabel: '文本框' }],
+            //    buttons: [{ text: '按钮' }]
+            //})
+            //form.render("form");
 
+            //-------------------表单案例整合------------------------------------
+
+            Ext.QuickTips.init();
+
+            var form = new Ext.form.FormPanel({
+                buttonAlign: 'center',
+                width: 600,
+                title: 'form',
+                frame: true,
+                fieldDefaults: {
+                    labelAlign: 'right',
+                    labelWidth: 70
+                },
+                items: [{
+                    xtype: 'container',
+                    layout: 'column',
+                    items: [
+                        {
+                            columnWidth: 0.7,//列宽
+                            xtype: 'fieldset',
+                            checkboxToggle: true,//设置为 true 则在 控件组 组头处显示一个复选框,用来 收缩/展开 控件组. 而该 复选框将会随表单一起提交,name是 checkboxName.
+                            title: '单纯输入',
+                            autoHeight: true,
+                            defaults: { width: 300 },// defaults 将会应用所有的子组件上,而不是父容器
+
+                            defaultType: 'textfield',//defaultType定义的是子元素类型。
+                                                     //例：new Ext.FormPanel({ defaultType: 'textfield', items: [componentconfig, ...] }); 
+                                                     //如果componentconfig未定义xtype, 则应用defaultType的定义
+                            items: [
+                                {
+                                    fieldLabel: '文本',
+                                    name: 'text'
+                                },
+                                {
+                                    xtype: 'numberfield',
+                                    fieldLabel: '数字',
+                                    name: 'number'
+                                },
+                                {
+                                    xtype: 'combo',
+                                    fieldLabel: '选择',
+                                    name: 'combo',
+                                    store: new Ext.data.SimpleStore({//新版4.2的extjs已经废弃了simpleStore -->替换为ArrayStore
+                                        fields: ['value', 'text'],
+                                        data: [
+                                            ['value1', 'text1'],
+                                            ['value2', 'text2']
+                                        ]
+                                    }),
+                                    displayField: 'text',
+                                    valueField: 'value',
+                                    model: 'local',//mode:'remote'指的是要动态去服务器端拿数据，而mode:'local'是取本地数据的也就是javascirpt(内存)中的数据
+                                    emptyText: '请选择'
+                                },
+                                {
+                                    xtype: 'datefield',
+                                    fieldLabel: '日期',
+                                    name: 'date'
+                                },
+                                {
+                                    xtype: 'timefield',
+                                    fieldLabel: '时间',
+                                    increment: 1,//下拉列表中时间选项使用的时间间隔(min)。
+                                    name: 'time'
+                                },
+                                {
+                                    xtype: 'textarea',
+                                    fieldLabel: '多行',
+                                    name: 'textarea'
+                                },
+                                {
+                                    xtype: 'hidden',
+                                    name: 'hidden'
+                                }]
+                        },
+                        {
+                            xtype: 'container',
+                            columnWidth: 0.3,
+                            layout: 'form',
+                            items: [
+                                {
+                                    xtype: 'fieldset',
+                                    checkboxToggle: true,
+                                    title: '多选',
+                                    autoHeight: true,
+                                    defaultType: 'checkbox',//defaultType定义的是子元素类型。如果子元素配置中未定义xtype, 则应用defaultType的定义
+                                    hideLabels: true,
+                                    style: 'margin-left;30px',
+                                    bodyStyle: 'margin-left:20px',
+                                    items: [
+                                        {
+                                            boxLabel: '首先要穿暖',
+                                            name: 'check',
+                                            value: '1',
+                                            checked: true,
+                                            width: 'auto'
+                                        },
+                                        {
+                                            boxLabel: '然后要吃饱',
+                                            name: 'check',
+                                            value: '2',
+                                            width: 'auto'
+
+                                        },
+                                        {
+                                            boxLabel: '也要体魄好',
+                                            name: 'check',
+                                            value: '3',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            boxLabel: '还要环境好',
+                                            name: 'check',
+                                            value: '4',
+                                            width: 'auto'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'fieldset',
+                                    checkboxToggle: true,
+                                    title: '单选',
+                                    autoHeight: true,
+                                    defaultType: 'radio',
+                                    hideLabels: true,
+                                    style: 'margin-left:20px',
+                                    items: [
+                                        {
+                                            boxLabel: '渴望自由',
+                                            name: 'FreedomOrLove',
+                                            value: '1',
+                                            checked: true,
+                                            width: 'auto'
+                                        },
+                                        {
+                                            boxLabel: '祈求爱情',
+                                            name: 'FreedomOrLove',
+                                            value: '2',
+                                            width: 'auto'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }, {
+                    xtype: 'container',
+                    layout: 'form',
+                    items: [{
+                        labelAlign: 'top',
+                        xtype: 'htmleditor',
+                        fieldLabel: '在线编辑器',
+                        id: 'editor',
+                        anchor: '98%',
+                        height: 200
+                    }]
+
+                }],
+                buttons: [{
+                    text: '保存'
+                }, {
+                    text: '读取'
+                }, {
+                    text: '取消'
+                }
+                ]
+            });
+            form.render("form");
+
+        })
     </script>
 </head>
 <body>

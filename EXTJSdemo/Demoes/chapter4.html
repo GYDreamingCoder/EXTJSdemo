@@ -25,177 +25,369 @@
 
             //-------------------表单案例整合------------------------------------
 
-            Ext.QuickTips.init();
+
+            //var form = new Ext.form.FormPanel({
+            //    buttonAlign: 'center',
+            //    width: 600,
+            //    title: 'form',
+            //    frame: true,
+            //    fieldDefaults: {
+            //        labelAlign: 'right',
+            //        labelWidth: 70
+            //    },
+            //    items: [{
+            //        xtype: 'container',
+            //        layout: 'column',
+            //        items: [
+            //            {
+            //                columnWidth: 0.7,//列宽
+            //                xtype: 'fieldset',
+            //                checkboxToggle: true,//设置为 true 则在 控件组 组头处显示一个复选框,用来 收缩/展开 控件组. 而该 复选框将会随表单一起提交,name是 checkboxName.
+            //                title: '单纯输入',
+            //                autoHeight: true,
+            //                defaults: { width: 300 },// defaults 将会应用所有的子组件上,而不是父容器
+
+            //                defaultType: 'textfield',//defaultType定义的是子元素类型。
+            //                                         //例：new Ext.FormPanel({ defaultType: 'textfield', items: [componentconfig, ...] });
+            //                                         //如果componentconfig未定义xtype, 则应用defaultType的定义
+            //                items: [
+            //                    {
+            //                        fieldLabel: '文本',
+            //                        name: 'text'
+            //                    },
+            //                    {
+            //                        xtype: 'numberfield',
+            //                        fieldLabel: '数字',
+            //                        name: 'number'
+            //                    },
+            //                    {
+            //                        xtype: 'combo',
+            //                        fieldLabel: '选择',
+            //                        name: 'combo',
+            //                        store: new Ext.data.SimpleStore({//新版4.2的extjs已经废弃了simpleStore -->替换为ArrayStore
+            //                            fields: ['value', 'text'],
+            //                            data: [
+            //                                ['value1', 'text1'],
+            //                                ['value2', 'text2']
+            //                            ]
+            //                        }),
+            //                        displayField: 'text',
+            //                        valueField: 'value',
+            //                        model: 'local',//mode:'remote'指的是要动态去服务器端拿数据，而mode:'local'是取本地数据的也就是javascirpt(内存)中的数据
+            //                        emptyText: '请选择'
+            //                    },
+            //                    {
+            //                        xtype: 'datefield',
+            //                        fieldLabel: '日期',
+            //                        name: 'date'
+            //                    },
+            //                    {
+            //                        xtype: 'timefield',
+            //                        fieldLabel: '时间',
+            //                        increment: 1,//下拉列表中时间选项使用的时间间隔(min)。
+            //                        name: 'time'
+            //                    },
+            //                    {
+            //                        xtype: 'textarea',
+            //                        fieldLabel: '多行',
+            //                        name: 'textarea'
+            //                    },
+            //                    {
+            //                        xtype: 'hidden',
+            //                        name: 'hidden'
+            //                    }]
+            //            },
+            //            {
+            //                xtype: 'container',
+            //                columnWidth: 0.3,
+            //                layout: 'form',
+            //                items: [
+            //                    {
+            //                        xtype: 'fieldset',
+            //                        checkboxToggle: true,
+            //                        title: '多选',
+            //                        autoHeight: true,
+            //                        defaultType: 'checkbox',//defaultType定义的是子元素类型。如果子元素配置中未定义xtype, 则应用defaultType的定义
+            //                        hideLabels: true,
+            //                        style: 'margin-left;30px',
+            //                        bodyStyle: 'margin-left:20px',
+            //                        items: [
+            //                            {
+            //                                boxLabel: '首先要穿暖',
+            //                                name: 'check',
+            //                                value: '1',
+            //                                checked: true,
+            //                                width: 'auto'
+            //                            },
+            //                            {
+            //                                boxLabel: '然后要吃饱',
+            //                                name: 'check',
+            //                                value: '2',
+            //                                width: 'auto'
+
+            //                            },
+            //                            {
+            //                                boxLabel: '也要体魄好',
+            //                                name: 'check',
+            //                                value: '3',
+            //                                width: 'auto'
+            //                            },
+            //                            {
+            //                                boxLabel: '还要环境好',
+            //                                name: 'check',
+            //                                value: '4',
+            //                                width: 'auto'
+            //                            }
+            //                        ]
+            //                    },
+            //                    {
+            //                        xtype: 'fieldset',
+            //                        checkboxToggle: true,
+            //                        title: '单选',
+            //                        autoHeight: true,
+            //                        defaultType: 'radio',
+            //                        hideLabels: true,
+            //                        style: 'margin-left:20px',
+            //                        items: [
+            //                            {
+            //                                boxLabel: '渴望自由',
+            //                                name: 'FreedomOrLove',
+            //                                value: '1',
+            //                                checked: true,
+            //                                width: 'auto'
+            //                            },
+            //                            {
+            //                                boxLabel: '祈求爱情',
+            //                                name: 'FreedomOrLove',
+            //                                value: '2',
+            //                                width: 'auto'
+            //                            }
+            //                        ]
+            //                    }
+            //                ]
+            //            }
+            //        ]
+            //    }, {
+            //        xtype: 'container',
+            //        layout: 'form',
+            //        items: [{
+            //            labelAlign: 'top',
+            //            xtype: 'htmleditor',
+            //            fieldLabel: '在线编辑器',
+            //            id: 'editor',
+            //            anchor: '98%',
+            //            height: 200
+            //        }]
+
+            //    }],
+            //    buttons: [{
+            //        text: '保存'
+            //    }, {
+            //        text: '读取'
+            //    }, {
+            //        text: '取消'
+            //    }
+            //    ]
+            //});
+            //form.render("form");
+
+            //----------------------Ext.Form.Filed验证--------------------------
+
+            //Ext.QuickTips.init();//为组件提供提示信息功能，form的主要提示信息就是客户端验证的错误信息。 
+
+            //var field1 = new Ext.form.TextField({
+            //    fieldLabel: "qtip",
+            //    msgTarget: "under",//msgTarget : String错误消息文本应该显示的位置。必须是下列值之一：title,under,side,none,elementId(参考文档)
+            //                       // qtip-当鼠标移动到控件上面时显示提示  
+            //                       // title-在浏览器的标题显示，但是测试结果是和qtip一样的  
+            //                       // under - 在控件的底下显示错误提示  
+            //                       // side-在控件右边显示一个错误图标，鼠标指向图标时显示错误提示.默认值.
+            //                       // id - [element id]错误提示显示在指定id的HTML元件中  
+            //    allowBlank: false,//与此参数配套使用的是BlankText属性
+            //    blankText: "不能为空哦",//当字段为空时,提示的信息
+            //    emptyText:"随便写点儿啥",
+            //    invalidText: "invalidText：只能够输入数字",
+
+            //});
+
+            //var field2 = new Ext.form.TextField({
+            //    fieldLabel: "title",
+            //    msgTarget: "title",
+            //    allowBlank: false
+
+            //});
+
+            //var field3 = new Ext.form.TextField({
+            //    fieldLabel: "side",
+            //    msgTarget: "side",
+            //    allowBlank: false
+
+            //});
+
+            //var field4 = new Ext.form.TextField({
+            //    fieldLabel: "under",
+            //    msgTarget: "under",
+            //    allowBlank: false
+            //});
+
+            //var textfieldName = new Ext.form.TextField
+            //    ({
+            //        id: "textfieldName",
+
+            //        allowBlank: false,//默认是true,如果是false,就是不允许空
+
+            //        //假如不为空时，定义提示信息　默认的提示信息是：This field is required
+            //        //要使提示内容出现，需要添加 Ext.QuickTips.init();
+            //        blankText: "请输入数据",
+
+            //        disabled: false,//默认是false
+
+            //        emptyText: "请正确输入数据",//默认是null
+
+            //        fieldLabel: "用户名称",//默认是""
+
+            //        height: "auto",//默认是auto
+
+            //        hidden: false,//默认是false
+
+            //        hideLabel: false,//默认是false
+
+            //        hideMode: "offsets",//默认display,可以取值：display，offsets，visibility
+
+            //        inputType: "text",//输入类型 这个很重要，可以是radio, text, password, file 默认是text
+
+            //        invalidText: "invalidText：只能够输入数字",//默认是：The value in this field is invalid
+
+            //        maxLength: 100,//能够输入的内容的最大长度
+
+            //        maxLengthText: "输入内容太长了",//超出最大长度的设置信息
+
+            //        minLength: 2,//能够输入的内容的最小长度
+
+            //        minLengthText: "输入内容太短了",//没有达到最小长度的设置信息
+
+            //        readOnly: false,//内容是否只读，默认false
+
+            //        regex: /^\d$/, //正则表达式　这里假设只允许输入数字　如果输入的不是数字　就会出现下面定义的提示信息
+
+            //        regexText: "regexText：只能够输入数字", //定义不符合正则表达式的提示信息
+
+            //        validateOnBlur: true,//默认是true,失去焦点时验证
+
+            //        validationDelay: 300,//默认是250,验证延迟时间,毫秒数
+
+            //        validationEvent: "click", //验证事件　默认是keyup　可以是String/Boolean
+
+            //        //自定义的验证函数　当输入的数据不符合正则表达式的要求时，就会执行这个函数
+            //        //validator: function () { Ext.Msg.alert("提示信息", "只能够输入数字"); },
+
+            //        value: "",//自定义的信息　默认是：undefined            
+
+            //        //x:number,y:number,在容器中的x,y坐标   
+
+            //        width: "auto",//默认是auto
+            //    })
+
+            //var form = new Ext.form.FormPanel({
+            //    title: "form",
+            //    frame: true,
+            //    items: [field1, field2, field3, field4, textfieldName],
+            //    renderTo: 'form'
+            //})
+
+            
+            //--------------------------------------图片展示-----------------------------------------
+
+            //Ext.QuickTips.init();
+
+            //var form = new Ext.form.FormPanel({
+            //    title: 'form',
+            //    defaultType: 'textfield',
+            //    frame: true,
+            //    width:'30%',
+            //    items: [{
+            //        fieldLabel: '证件照片',
+            //        name: 'smallimg',
+            //        inputType: 'image',
+            //        inputAttrTpl: [
+            //            'src="../../resources/themes/images/default/boundlist/trigger-arrow.png"'
+            //        ],
+            //        width: 140,
+            //        height: 120
+            //    }],
+            //    renderTo: 'form'
+            //});
+
+            //---------------------------------------ComboBox控件---------------------------------------------
+            //var data = [
+            //    ['value1', 'A'],
+            //    ['value2', 'B'],
+            //    ['value3', 'C'],
+            //    ['value4', 'D'],
+            //    ['value5', 'E']
+            //];
+                
+            //var store = new Ext.data.ArrayStore({
+            //    fields: ['value', 'text'],
+            //    data: data
+            //})
+            //store.load();
+
+            //var combo = new Ext.form.ComboBox({
+            //    fieldLabel: '請選擇',
+            //    readOnly: false,
+            //    width:350,
+            //    store: store,
+            //    emptyText: "请选择",
+            //    mode: 'local',//local：意思是，告诉ComboBox,它需要的数据已经读取到本地了,不需要再去后台读取了；还有一个参数remote，如果参数为remote,则无需使用store.load()方法,否则会读取两次数据.
+            //    valueField: 'value',
+            //    displayField: 'text',
+            //    triggerAction: 'all',//触发器被点击时执行的操作,含有两个参数-->query：会根据输入字符过滤结果集作为下拉列表；all：显示所有数据作为下拉列表，没有过滤
+            //    minListWidth: 400,
+            //    pageSize: 3,//测试无效
+            //    editable:false,
+            //    renderTo: 'combo'
+            //})
+
+            //--------------------------------------ItemSelector--------------------------------
+
+            Ext.Loader.setConfig({ enabled: true });
+            Ext.Loader.setPath('Ext.ux', '../../examples/ux');
+            Ext.require([
+                'Ext.form.Panel',
+                'Ext.ux.form.MultiSelect',
+                'Ext.ux.form.ItemSelector',
+                'Ext.tip.QuickTipManager',
+                'Ext.ux.ajax.JsonSimlet',
+                'Ext.ux.ajax.SimManager'
+            ]);
 
             var form = new Ext.form.FormPanel({
-                buttonAlign: 'center',
-                width: 600,
-                title: 'form',
+                title: 'Item Selector',
                 frame: true,
-                fieldDefaults: {
-                    labelAlign: 'right',
-                    labelWidth: 70
-                },
+                width: 600,
                 items: [{
-                    xtype: 'container',
-                    layout: 'column',
-                    items: [
-                        {
-                            columnWidth: 0.7,//列宽
-                            xtype: 'fieldset',
-                            checkboxToggle: true,//设置为 true 则在 控件组 组头处显示一个复选框,用来 收缩/展开 控件组. 而该 复选框将会随表单一起提交,name是 checkboxName.
-                            title: '单纯输入',
-                            autoHeight: true,
-                            defaults: { width: 300 },// defaults 将会应用所有的子组件上,而不是父容器
-
-                            defaultType: 'textfield',//defaultType定义的是子元素类型。
-                                                     //例：new Ext.FormPanel({ defaultType: 'textfield', items: [componentconfig, ...] }); 
-                                                     //如果componentconfig未定义xtype, 则应用defaultType的定义
-                            items: [
-                                {
-                                    fieldLabel: '文本',
-                                    name: 'text'
-                                },
-                                {
-                                    xtype: 'numberfield',
-                                    fieldLabel: '数字',
-                                    name: 'number'
-                                },
-                                {
-                                    xtype: 'combo',
-                                    fieldLabel: '选择',
-                                    name: 'combo',
-                                    store: new Ext.data.SimpleStore({//新版4.2的extjs已经废弃了simpleStore -->替换为ArrayStore
-                                        fields: ['value', 'text'],
-                                        data: [
-                                            ['value1', 'text1'],
-                                            ['value2', 'text2']
-                                        ]
-                                    }),
-                                    displayField: 'text',
-                                    valueField: 'value',
-                                    model: 'local',//mode:'remote'指的是要动态去服务器端拿数据，而mode:'local'是取本地数据的也就是javascirpt(内存)中的数据
-                                    emptyText: '请选择'
-                                },
-                                {
-                                    xtype: 'datefield',
-                                    fieldLabel: '日期',
-                                    name: 'date'
-                                },
-                                {
-                                    xtype: 'timefield',
-                                    fieldLabel: '时间',
-                                    increment: 1,//下拉列表中时间选项使用的时间间隔(min)。
-                                    name: 'time'
-                                },
-                                {
-                                    xtype: 'textarea',
-                                    fieldLabel: '多行',
-                                    name: 'textarea'
-                                },
-                                {
-                                    xtype: 'hidden',
-                                    name: 'hidden'
-                                }]
-                        },
-                        {
-                            xtype: 'container',
-                            columnWidth: 0.3,
-                            layout: 'form',
-                            items: [
-                                {
-                                    xtype: 'fieldset',
-                                    checkboxToggle: true,
-                                    title: '多选',
-                                    autoHeight: true,
-                                    defaultType: 'checkbox',//defaultType定义的是子元素类型。如果子元素配置中未定义xtype, 则应用defaultType的定义
-                                    hideLabels: true,
-                                    style: 'margin-left;30px',
-                                    bodyStyle: 'margin-left:20px',
-                                    items: [
-                                        {
-                                            boxLabel: '首先要穿暖',
-                                            name: 'check',
-                                            value: '1',
-                                            checked: true,
-                                            width: 'auto'
-                                        },
-                                        {
-                                            boxLabel: '然后要吃饱',
-                                            name: 'check',
-                                            value: '2',
-                                            width: 'auto'
-
-                                        },
-                                        {
-                                            boxLabel: '也要体魄好',
-                                            name: 'check',
-                                            value: '3',
-                                            width: 'auto'
-                                        },
-                                        {
-                                            boxLabel: '还要环境好',
-                                            name: 'check',
-                                            value: '4',
-                                            width: 'auto'
-                                        }
-                                    ]
-                                },
-                                {
-                                    xtype: 'fieldset',
-                                    checkboxToggle: true,
-                                    title: '单选',
-                                    autoHeight: true,
-                                    defaultType: 'radio',
-                                    hideLabels: true,
-                                    style: 'margin-left:20px',
-                                    items: [
-                                        {
-                                            boxLabel: '渴望自由',
-                                            name: 'FreedomOrLove',
-                                            value: '1',
-                                            checked: true,
-                                            width: 'auto'
-                                        },
-                                        {
-                                            boxLabel: '祈求爱情',
-                                            name: 'FreedomOrLove',
-                                            value: '2',
-                                            width: 'auto'
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }, {
-                    xtype: 'container',
-                    layout: 'form',
-                    items: [{
-                        labelAlign: 'top',
-                        xtype: 'htmleditor',
-                        fieldLabel: '在线编辑器',
-                        id: 'editor',
-                        anchor: '98%',
-                        height: 200
-                    }]
-
-                }],
-                buttons: [{
-                    text: '保存'
-                }, {
-                    text: '读取'
-                }, {
-                    text: '取消'
-                }
-                ]
-            });
-            form.render("form");
-
+                    xtype: 'itemselector',
+                    name: 'itemselector',
+                    id: 'itemselector-field',
+                    anchor: '100%',
+                    fieldLabel: 'ItemSelector',
+                    imagePath: '../../examples/ux/images',
+                    stores: ds,
+                    displayField: 'text',
+                    valueField: 'value',
+                    value: ['3', '4', '6'],
+                    allowBlank: false,
+                    MsgTarget: 'side',
+                    FormTitle:'Available',
+                    toTitle:'selected'
+                }]
+            })
         })
     </script>
 </head>
 <body>
     <div id="form"></div>
+    <div id="combo"></div>
 </body>
 </html>

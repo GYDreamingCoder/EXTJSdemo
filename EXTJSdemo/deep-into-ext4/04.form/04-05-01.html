@@ -9,16 +9,22 @@
 Ext.onReady(function(){
 
     var store = new Ext.data.Store({
-		proxy: {
-			type: 'ajax',
-			url: '07-04-01.txt',
-			reader: 'array'
-		},
-		fields: ['value', 'text']
+        proxy: {
+            type: 'ajax',
+            url: '04-04-01.txt',
+            reader: {
+                type: 'array'
+            }
+        },
+        fields: [
+            { name: 'value' },
+            { name: 'text' }
+        ]
     });
 
     var combo = new Ext.form.ComboBox({
         store: store,
+        width:400,
         emptyText: '«Î—°‘Ò',
         mode: 'remote',
         triggerAction: 'all',
@@ -26,7 +32,7 @@ Ext.onReady(function(){
         displayField: 'text',
 		renderTo: 'combo',
         minListWidth: 220,
-        pageSize: 5,
+        pageSize: 2,
         editable: false
     });
 });

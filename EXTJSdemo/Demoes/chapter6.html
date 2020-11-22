@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>第六章-布局</title>
+    <link href="../resources/css/ext-all.css" rel="stylesheet" />
+    <script type="text/javascript" src="../ext-all.js"></script>
+    <script>
+        Ext.onReady(function () {
+
+            //----------------------------基本布局-------------------------
+            var viewport = new Ext.Viewport({
+                layout: 'border',
+                items: [
+                    {
+                    region: 'north',
+                    height: 40,
+                    html:'<h1>顶栏</h1>'
+                    },
+                    {
+                        region: 'west',
+                        width: 100,
+                        html:'<p>菜单</p><p>菜单2</p>'
+                    },
+                    {
+                        region: 'center',
+                        width:100,
+                        html:'主要内容'
+                    }
+                ]
+            })        
+        })
+    </script>
+</head>
+<body>
+    <div id="form"></div>
+    <div id="combo"></div>
+</body>
+</html>

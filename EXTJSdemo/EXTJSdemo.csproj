@@ -800,6 +800,7 @@
     <Content Include="deep-into-ext4\14.mvc\oa\styles\ext-patch.css" />
     <Content Include="Demoes\chapter2.html" />
     <Content Include="Demoes\chapter3.html" />
+    <Content Include="Demoes\chapter6.html" />
     <Content Include="Demoes\chapter4.html" />
     <Content Include="Demoes\demo1.html" />
     <Content Include="examples\app\feed-viewer\all-classes.js" />

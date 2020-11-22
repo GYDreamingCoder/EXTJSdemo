@@ -6,6 +6,18 @@
     <link href="../resources/css/ext-all.css" rel="stylesheet" />
     <script type="text/javascript" src="../ext-all.js"></script>
     <script>
+        Ext.Loader.setConfig({ enabled: true });//是否启用依赖的动态加载功能。
+        Ext.Loader.setPath('Ext.ux', '../examples/ux');//设置路径命名空间
+        Ext.require([//加载所有的类名和直接依赖关系
+            'Ext.form.Panel',
+            'Ext.ux.form.MultiSelect',
+            'Ext.ux.form.ItemSelector',
+            'Ext.tip.QuickTipManager',
+            'Ext.ux.ajax.JsonSimlet',
+            'Ext.ux.ajax.SimManager'
+        ]);
+
+
         Ext.onReady(function () {
             //-----------------------基本表单------------------------------------
             //var form = new Ext.form.FormPanel({
@@ -349,39 +361,255 @@
             //    renderTo: 'combo'
             //})
 
-            //--------------------------------------ItemSelector--------------------------------
+            //--------------------------------------ItemSelector(功能未实现)--------------------------------
 
-            Ext.Loader.setConfig({ enabled: true });
-            Ext.Loader.setPath('Ext.ux', '../../examples/ux');
-            Ext.require([
-                'Ext.form.Panel',
-                'Ext.ux.form.MultiSelect',
-                'Ext.ux.form.ItemSelector',
-                'Ext.tip.QuickTipManager',
-                'Ext.ux.ajax.JsonSimlet',
-                'Ext.ux.ajax.SimManager'
-            ]);
+            //Ext.QuickTips.init();
+
+            //function createDockedItems(fieldId) {
+            //    return [
+            //        {
+            //            xtype: 'toorbar',//使用 xtype 是最常见的方式来定义组件实例, 特别是在一个容器中.可以看做 Ext.create('Ext.form.field.ToolBar',{}) 的缩写
+            //            dock: 'top',//布局
+            //            items: {
+            //                text: 'Options',
+            //                menu: [//配置一个子菜单
+            //                    {
+            //                        text: 'get value',
+            //                        handler: function () {
+            //                            var value = ext.getCmp(field).getValue();
+            //                            Ext.Msg.alert('Value is a split array', value.join(','));
+            //                        }
+            //                    },
+            //                    {
+            //                        text: 'set value',
+            //                        handler: function () {
+            //                            ext.getCmp(field).setValue(['1', '2']);
+            //                        }
+            //                    },
+            //                    {
+            //                        text: 'Toggle enabled',
+            //                        checked: true,
+            //                        checkHandler: function (item,checked) {
+            //                            Ext.getCmp(fieldId).setDisabled(!checked);
+            //                        }
+            //                    },
+            //                    {
+            //                        text: 'Toggle delimiter',
+            //                        checked: true,
+            //                        checkHandler: function (item, checked) {
+            //                            var field = Ext.getCmp(fieldId);
+            //                            if (checked) {
+            //                                field.delimiter = ',';
+            //                                Ext.msg.alert("Fighting")
+            //                            }
+            //                            else {
+            //                                field.delimiter = ',';
+            //                                Ext.msg.alert("no Fighting")
+            //                            }
+            //                        }
+            //                    }
+            //                ]
+            //            }
+            //        },
+            //        {//定义底部菜单
+            //            xtype: 'toolbar',
+            //            dock: 'bottom',//布局
+            //            ui: 'footer',//设置组件样式. 可以是一个字符串或者字符串数组
+            //            defaults: {//默认属性将会应用到所有的子组件上，但是不会覆盖子组件本身已经有的属性 
+            //                minWidth: 75
+            //            },
+            //            item: ['->',
+            //                {
+            //                    text: 'Clear',
+            //                    handler: function () {//handler：在主要的事件被触发时，都会调用的函数。
+            //                        var field = Ext.getCmp(fieldId);
+            //                        if (!fileld.disabled) {
+            //                            field.clearValue();
+            //                        }
+            //                    }
+            //                },
+            //                {
+            //                    text: 'Reset',
+            //                    handler: function () {
+            //                        Ext.getCmp(fieldId).up('form').getForm().reset();//up():查找匹配简单选择器的祖先容器.reset():当表单重置时触发.
+            //                    }
+            //                },
+            //                {
+            //                    text: 'Save',
+            //                    handler: function () {
+            //                        var form = Ext.getCmp(fieldId).up('form').getForm();//getForm()获取此 Panel 包含的 Form.
+            //                        form.getValues(true);//获取给定对象所有的值组成的数组。
+            //                        if (form.isValid) {
+            //                            Ext.msg.alert('警告', 'this is a worn'+
+            //                            form.getValues(true));
+            //                        }
+            //                    }
+            //                }
+            //            ]
+            //        }
+            //    ]
+            //}
+
+            //Ext.ux.ajax.SimManager.init({
+            //    delay: 300,
+            //    defaultsSimlet:null
+            //}).register({//向管理类注册一个对象
+            //    'Numbers': {
+            //        data: [['123', 'one tow three'], ['1', 'one'], ['2', 'two two']],
+            //        stype: 'josn'
+            //    }
+            //    })
+
+
+            //var ds = Ext.create('Ext.data.ArrayStore', {
+            //    fields: ['value', 'text'],
+            //    proxy: {//proxy为获取数据的方式
+            //        type: 'ajax',
+            //        url: 'Numbers',
+            //        reader: 'array'
+            //    },
+            //    autoLoad: true,//如果data属性未定义, 并且autoLoad值为'true'或对象, 则此store的load方法将在创建后自动执行. 如果autoLoad值是一个对象, 这个对象将 作为参数传递给load方法. 默认为'false'.
+            //    sortInfo: {
+            //        field: 'value',
+            //        direction: 'ASC'
+            //    }
+            //});
+
+
+
+            //var isForm = Ext.widget('form', {
+            //    title: 'ItemSelector Test',
+            //    width: 700,
+            //    bodyPadding: 10,
+            //    height: 300,
+            //    renderTo: 'itemselector',
+            //    layout: 'fit',
+            //    item: [
+            //        {
+            //            xtype: 'itemselector',
+            //            name: 'itemselector',
+            //            id: 'itemselector-field',
+            //            anchor: '100%',//这个布局将子元素的位置与父容器大小进行关联固定. 如果容器大小改变, 所有固定的子项将按各自的anchor 规则自动被重新渲染固定.
+            //            fieldLabel: 'ItemSelector',
+            //            imagePath: '../../examples/ux/images/',
+            //            store: ds,
+            //            displayField: 'value',
+            //            value: ['3', '4', '5'],
+            //            allowBlank: false,
+            //            msgTaget: 'side',
+            //            formTitle: 'Available',
+            //            toTitle:'Selector'
+            //        }
+            //    ],
+            //    dockedItems: createDockedItems('itemselector-field')//一个或者一系列组件作为挂靠组件被添加到panel中。 这个挂靠组件可以被安置在panel的上，右，左或者底部。 这是toolbars 或 tab bars一个典型的应用
+            //})
+
+
+
+            //----------------------------------checkBox取值-------------------------------------
+
+            //var form = new Ext.form.FormPanel({
+            //    id: 'panel',
+            //    labelAlign: 'right',
+            //    title: 'form',
+            //    labelWidth: 50,
+            //    buttonAlign: 'center',
+            //    frame: true,
+            //    width: 280,
+            //    items: [{
+            //        xtype: 'checkboxgroup',
+            //        title: '多选',
+            //        autoHeight: true,
+            //        columns: 2,
+            //        id: 'ckb',
+            //        hideLabels: true,
+            //        items: [
+            //            { boxLabel: '多选一', inputValue: '1', checked: true },
+            //            { boxLabel: '多选二', inputValue: '2' },
+            //            { boxLabel: '多选三', inputValue: '3' }
+            //        ]
+            //    }],
+            //    buttons: [{
+            //        text: '提交',
+            //        handler: function () {
+            //            var values = Ext.getCmp('ckb').items.items;//获取checkBox所有子项
+            //            var res = "";
+            //            Ext.Array.each(values, function (item) {
+            //                if (item.checked)//如果被选中
+            //                    res += item.boxLabel+"："+item.inputValue + '|';
+            //            });
+            //            Ext.Msg.alert(res);
+            //            form.getForm().submit();
+            //        }
+            //    }]
+            //});
+            //form.render("form");
+        
+            //-------------------------------submit()提交表单--------------------------------
+
+            //var form = new Ext.form.FormPanel({
+            //    defaultType: 'textfield',
+            //    labelAlign: 'right',
+            //    title: 'form',
+            //    labelWidth: 50,
+            //    buttonAlign: 'center',
+            //    frame: true,
+            //    width: 220,
+            //    url: '09_01_01.jsp',//action的url（默认为表单的url）
+
+            //    items: [{
+            //        fieldLabel: '文本框',
+            //        name: 'text'
+            //    }],
+            //    buttons: [{
+            //        text: '提交',
+            //        handler: function () {
+            //            form.getForm().submit({//submit函数中也可以添加回调函数
+            //                success: function (form, action) {
+            //                    Ext.Msg.alert('信息', action.result.msg);
+            //                },
+            //                failure: function () {
+            //                    Ext.Msg.alert('错误', '操作失败！');
+            //                }
+            //            });
+            //        }
+            //    }]
+            //});
+            //form.render("form");
+
+            //-------------------------------Ajax提交表单--------------------------------
+
+            //YZSoft.Ajax.request({
+            //    url: YZSoft.$url('ZYJY/Services.ashx'),
+            //    method: 'POST',
+            //    async: false, //同步执行
+            //    params: {
+            //        method: 'GetDataGuideTable',
+            //        type1: typ1,
+            //        type2: typ2,
+            //        type3: typ3
+            //    },
+            //    success: function (response) {
+            //        var result = Ext.decode(response.responseText);
+            //        Ext.Msg.alert('信息', result.msg);
+            //    },
+            //    failure: function (action) {
+            //    }
+            //});
+
+            //-------------------------------------------文件上传-------------------------------------
 
             var form = new Ext.form.FormPanel({
-                title: 'Item Selector',
+                title: 'File Upload Field',
+                fileUpload: true,
                 frame: true,
-                width: 600,
+                width: 400,
                 items: [{
-                    xtype: 'itemselector',
-                    name: 'itemselector',
-                    id: 'itemselector-field',
-                    anchor: '100%',
-                    fieldLabel: 'ItemSelector',
-                    imagePath: '../../examples/ux/images',
-                    stores: ds,
-                    displayField: 'text',
-                    valueField: 'value',
-                    value: ['3', '4', '6'],
-                    allowBlank: false,
-                    MsgTarget: 'side',
-                    FormTitle:'Available',
-                    toTitle:'selected'
-                }]
+                    xtype: "fileuploadfield",
+                    fieldLabel: '文件上传',
+                    name:"fileUpload"
+                }],
+                renderTo:'form' 
             })
         })
     </script>

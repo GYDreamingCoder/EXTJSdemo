@@ -8,32 +8,263 @@
     <script>
         Ext.onReady(function () {
 
-            //----------------------------基本布局-------------------------
-            var viewport = new Ext.Viewport({
-                layout: 'border',
-                items: [
-                    {
-                    region: 'north',
-                    height: 40,
-                    html:'<h1>顶栏</h1>'
-                    },
-                    {
-                        region: 'west',
-                        width: 100,
-                        html:'<p>菜单</p><p>菜单2</p>'
-                    },
-                    {
-                        region: 'center',
-                        width:100,
-                        html:'主要内容'
-                    }
-                ]
-            })        
+            //    //----------------------------BorderLayout布局-------------------------
+            //var viewport = new Ext.Viewport({
+            //    layout: 'border',
+            //    items: [
+            //        {
+            //            region: 'north',
+            //            height: 300,
+            //            title: 'northPanel',
+            //            collapsible: true,
+            //            html: '<h1>顶栏</h1>'
+            //        },
+            //        {
+            //            region: 'west',
+            //            width: 300,
+            //            title: 'WestPanel',
+            //            collapsible: true,
+            //            html: '<p>菜单</p><p>菜单2</p>'
+            //        },
+            //        {
+            //            region: 'center',
+            //            width: 100,
+            //            title: 'CenterPanel',//折叠区域标题（要实现区域可折叠功能,此项必须配置）
+            //            collapsible: true,//将此区域设置为可折叠
+            //            html: '主要内容'
+            //        }
+            //    ]
+            //})
+
+            //---------------------------------------Accordion-------------------------------------
+            //var viewport = new Ext.Viewport({
+            //    layout: 'border',
+            //    items: [
+            //        {
+            //            region: 'west',
+            //            width: 200,
+            //            title: '左边栏',
+            //            layout: 'accordion',
+            //            layoutConfig: { //与布局有关的参数都写到layoutConfig中,那么在随后的布局时,会自动赋给对应的layout实例
+            //                titleCollapse: true,//'true'允许通过单击Panel头部的任何位置实现Panel展开和折叠之间的切换(当collapsible = true) 'false'只能通过点击工具按钮来实现展开和折叠之间切换的实现。默认为false。
+            //                animate: true,//折叠时的滑动效果
+            //                activeOntop: false
+            //            },
+            //            items: [
+            //                {
+            //                    title: '第一栏',
+            //                    html:'第一栏'
+            //                },
+            //                {
+            //                    title: '第二栏',
+            //                    html: '第二栏'
+            //                },
+            //                {
+            //                    title: '第三栏',
+            //                    html: '第三栏'
+            //                }
+            //            ]
+            //        }, {
+            //            region: 'center',
+            //            split: true,//分割按钮提供了内置的下拉箭头菜单，可以分别触发按钮不同的单击时事件 一般使用下拉菜单用于提供主按钮之外的附加选项， 并且可以实现不同的单击事件
+            //            border:true
+            //        }
+            //    ]
+            //})
+
+            //---------------------------------AnchorLayout-------------------------------------
+            //var viewport = new Ext.Viewport({
+            //    layout: 'anchor',
+            //    items: [{
+            //        title: 'panel1',
+            //        html: '使用比例的方式设置组件大小 ',
+            //        anchor: '50% 50%'
+            //    }, {
+            //        title: 'panel2',
+            //        html: 'this is Panel2 ',
+            //        anchor: '10%'
+            //    }, {
+            //        title: 'Panel3',
+            //        html: '使用设置边距的方式设置组件大小',
+            //        anchor: '-550 -600'//-500的意思是Panel的高度要在页面整体的高度(宽度)上减去500
+            //    }, {
+            //        title: 'Panel4',
+            //        html: '使用设置边距的方式设置组件大小',
+            //        anchor: '-500'//只设置了一个值,则只计算相对右侧的距离,高度被自动赋予auto
+            //    }
+            //    ]
+            //})
+
+            //---------------------------------表单专用布局---------------------------------------
+
+            //var viewport = new Ext.Viewport({
+            //    layout: 'fit',
+            //    items: [{
+            //        xtype: 'form',
+            //        title: '信息',
+            //        labelAlign: 'right',
+            //        labelWidth: '50',
+            //        frame: true,
+            //        defaultType: 'textfield',
+            //        items: [{
+            //            fieldLabel: '名称',
+            //            name: 'name',
+            //            anchor: '90%'
+            //        }, {
+            //            fieldLabel: '生日',
+            //            name: 'birth',
+            //            xtype: ' datefield',
+            //            anchor: '90%'
+            //        }, {
+            //            fieldLabel: '备注',
+            //            name: 'desc',
+            //            xtype: 'textarea',
+            //            anchor: '90% -100'
+            //        }
+            //        ]
+            //    }]
+            //})
+
+            // ------------------------------------分列布局ColumnLayout-------------------------------
+            //var viewport = new Ext.Viewport({
+            //    layout: 'column',
+            //    items: [{
+            //        title: 'Column1',
+            //        columnWidth:.25 //注意,columnWidth的总和和必须为1,否则无法实现预期效果
+            //    }, {
+            //            title: 'Column2',
+            //            columnWidth: .5
+            //        }, {
+            //            title: 'Column3',
+            //            columnWidth: .25
+            //        }]
+            //})
+
+            //------------------------------------HBox(简单横向布局)和VBox(简单纵向布局)----------------------------------
+
+            //var Panel = new Ext.Panel({
+            //    title: 'HBox',
+            //    width: 400,
+            //    height: 200,
+            //    renderTo: 'grid',
+            //    layout: {
+            //        type: 'hbox',
+            //        padding: '5',
+            //        align: 'stretch'//将内部组件宽度设置为充满容器
+            //    },
+            //    defaults: { margins: '0 0 5 0' },
+            //    items: [{
+            //        xtype: 'button',
+            //        text: 'Button1',
+            //        flex: 1
+            //    }, {
+            //        xtype: 'button',
+            //        text: 'Button2',
+            //        flex: 1
+            //    }, {
+            //        xtype: 'button',
+            //        text: 'Button3',
+            //        flex: 4
+            //    }, {
+            //        xtype: 'button',
+            //        text: 'Button4',
+            //        flex: 3
+            //    }]
+            //})
+
+            //var Panel = new Ext.Panel({
+            //    title: 'VBox',
+            //    width: 400,
+            //    height: 200,
+            //    renderTo: 'grid',
+            //    layout: {
+            //        type: 'vbox',
+            //        padding: '5',
+            //        align: 'stretch'
+            //    },
+            //    defaults: { margins: '0 0 5 0' },
+            //    items: [{
+            //        xtype: 'button',
+            //        text: 'Button1',
+            //        flex: 1
+            //    }, {
+            //        xtype: 'button',
+            //        text: 'Button2',
+            //        flex: 1
+            //    }, {
+            //        xtype: 'button',
+            //        text: 'Button3',
+            //        flex: 4
+            //    }, {
+            //        xtype: 'button',
+            //        text: 'Button4',
+            //        flex: 3
+            //    }]
+            //})
+
+            //-----------------------------------------Ext.TabPanel----------------------------------------------
+            var upld = new Ext.form.FormPanel({
+                title: 'File Upload Field',
+                fileUpload: true,
+                frame: true,
+                width: 400,
+                items: [{
+                    xtype: "fileuploadfield",
+                    fieldLabel: '文件上传',
+                    name: "fileUpload"
+                }],
+            })
+
+            var tabs = new Ext.TabPanel({
+                renderTo: document.body,
+                height:100
+            })
+    
+            tabs.add({//添加Tab
+                title: '标题1',
+                html: '内容1',
+                items: [upld],
+                layout: 'fit',//子项铺满Tab
+            })
+
+            tabs.add({
+                id: Ext.id(),//使用Id()函数,时生成唯一Id
+                title: '标题2',
+                html: '内容2',
+                closable: true,//是否 可以手动关闭tab(会显示关闭按钮)
+            });
+            var btnGetHTML = new Ext.Button({
+                text: '获取指定页面HTML',
+                handler: function () {
+                    var tab = tabs.add({
+                        title: '文本' + Ext.id(),
+                        layout: 'fit',
+                        autoLoad: { url:'TestHTML/12-01-03-01.html'}
+                    })
+                },
+                renderTo: 'form',
+            })
+
+            var btnGetScriptHTML = new Ext.Button({
+                text: '获取指定含有脚本页面的HTML',
+                handler: function () {
+                    var tab = tabs.add({
+                        title: '文本' + Ext.id(),
+                        layout: 'fit',
+                        autoLoad: { url: 'TestHTML/12-01-03-02.html', scripts: true }
+                    })
+                },
+                renderTo: 'form',
+            })
+            //tabs.activate(0);  // 激活第一个Tab
+
+
         })
     </script>
 </head>
 <body>
     <div id="form"></div>
     <div id="combo"></div>
+    <div id="grid"></div>
 </body>
 </html>

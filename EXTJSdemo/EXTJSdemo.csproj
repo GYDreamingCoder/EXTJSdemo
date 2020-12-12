@@ -803,6 +803,8 @@
     <Content Include="Demoes\chapter6.html" />
     <Content Include="Demoes\chapter4.html" />
     <Content Include="Demoes\demo1.html" />
+    <Content Include="Demoes\TestHTML\12-01-03-01.html" />
+    <Content Include="Demoes\TestHTML\12-01-03-02.html" />
     <Content Include="examples\app\feed-viewer\all-classes.js" />
     <Content Include="examples\app\feed-viewer\app.js" />
     <Content Include="examples\app\feed-viewer\app\controller\Articles.js" />

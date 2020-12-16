@@ -6,6 +6,16 @@
     <link href="../resources/css/ext-all.css" rel="stylesheet" />
     <script type="text/javascript" src="../ext-all.js"></script>
     <script>
+        Ext.Loader.setPath('Ext.ux', '../examples/ux/');
+
+        Ext.require([
+            'Ext.tip.QuickTipManager',
+            'Ext.window.Window',
+            'Ext.tab.Panel',
+            'Ext.ux.TabScrollerMenu'
+        ]);
+
+
         Ext.onReady(function () {
 
             //    //----------------------------BorderLayout布局-------------------------
@@ -217,7 +227,8 @@
 
             var tabs = new Ext.TabPanel({
                 renderTo: document.body,
-                height:100
+                height: 300,
+                width:300
             })
     
             tabs.add({//添加Tab
@@ -241,6 +252,7 @@
                         layout: 'fit',
                         autoLoad: { url:'TestHTML/12-01-03-01.html'}
                     })
+                    tabs.setActiveTab(tab);//打开此Tab
                 },
                 renderTo: 'form',
             })
@@ -251,12 +263,61 @@
                     var tab = tabs.add({
                         title: '文本' + Ext.id(),
                         layout: 'fit',
-                        autoLoad: { url: 'TestHTML/12-01-03-02.html', scripts: true }
+                        autoLoad: { url: 'TestHTML/12-01-03-02.html', scripts: true }//表示可执行带有脚本的页面
                     })
+                    tabs.setActiveTab(tab);
                 },
                 renderTo: 'form',
             })
             //tabs.activate(0);  // 激活第一个Tab
+
+            //--------------------------标签面板滚动菜单(经测试无效)------------------------
+            //var ScrollerMenu = new Ext.ux.TabScrollerMenu({
+            //    maxText: 15,
+            //    pageSize:5
+            //})
+            //var tabs = new Ext.TabPanel({
+            //    height: 200,
+            //    width: 400,
+            //    setActiveTab: 0,
+            //    enableTabScroll: true,
+            //    resizeTabs: true,
+            //    minTabWidth: 75,
+            //    frame: true,
+            //    plugins: [ScrollerMenu],
+            //    items: [{ title: 'tabs' }],
+            //    renderTo:'tabs'
+            //})
+
+            //------------------------------竖直分组的标签面板(经测试无效)--------------------------
+            var panel = new Ext.Panel({
+                title: '竖直分组的标签面板',
+                width: 500,
+                height: 200,
+                items: [{
+                    xtype: 'grouptabpanel',
+                    tabWidth: 80,
+                    activeGroup: 0,
+                    items: [{
+                        mainItem: 0,
+                        title: '001',
+                        items: [{
+                            title: 'tab 1',
+                            tabTip: 'Tickets tabtip',
+                            html: 'This is a group tab panel. This is the #1 tab.'
+                        }]
+                    }, {
+                        mainItem: 0,
+                        title: '002',
+                        items: [{
+                            title: 'tab 2',
+                            tabTip: 'Tickets tabtip',
+                            html: 'This is a group tab panel. This is the #2 tab.'
+                        }]
+                    }]
+                }],
+                renderTo: 'form'
+            })
 
 
         })

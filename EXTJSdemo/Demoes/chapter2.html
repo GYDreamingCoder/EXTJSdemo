@@ -8,40 +8,40 @@
         Ext.onReady(function () {
         /// <reference path="../ext/ext-all-dev.js" />//智能提示
 
-            //-------------1---------------
-            //var columns = [
-            //    { header: '编号', dataIndex: 'id' },
-            //    { header: '名称', dataIndex: 'name' },
-            //    { header: '描述', dataIndex: 'descn' }
-            //];
+           // -------------1---------------
+            var columns = [
+                { header: '编号', dataIndex: 'id' },
+                { header: '名称', dataIndex: 'name' },
+                { header: '描述', dataIndex: 'descn' }
+            ];
 
-            //var data = [
-            //    ['1', 'name1', 'descn1'],
-            //    ['2', 'name2', 'descn2'],
-            //    ['3', 'name3', 'descn3'],
-            //    ['4', 'name4', 'descn4'],
-            //    ['5', 'name5', 'descn5']
-            //];
+            var data = [
+                ['1', 'name1', 'descn1'],
+                ['2', 'name2', 'descn2'],
+                ['3', 'name3', 'descn3'],
+                ['4', 'name4', 'descn4'],
+                ['5', 'name5', 'descn5']
+            ];
 
-            //var store = new Ext.data.ArrayStore({
-            //    data: data,
-            //    fields: [
-            //        { name: 'id' },
-            //        { name: 'name' },
-            //        { name: 'descn' }
-            //    ]
-            //});
-            //store.load();
+            var store = new Ext.data.ArrayStore({
+                data: data,
+                fields: [
+                    { name: 'id' },
+                    { name: 'name' },
+                    { name: 'descn' }
+                ]
+            });
+            store.load();
 
-            //var grid = new Ext.grid.GridPanel({
-            //    autoHeight: true,
-            //    width:300,
-            //    renderTo: 'grid',
-            //    store: store,
-            //    columns: columns
-            //});
+            var grid = new Ext.grid.GridPanel({
+                autoHeight: true,
+                width:300,
+                renderTo: 'grid',
+                store: store,
+                columns: columns
+            });
 
-            //-----------------2-------------------
+           // -----------------2-------------------
             //var box = new Ext.Component({
             //    style: "background-color: red; position: absolute;",
             //    width: 100,
@@ -50,15 +50,15 @@
             //box.render();
 
             //----------------3------------------
-            //var panel = new Ext.Panel({
-            //        el: 'grid',
-            //        title: '窗体A',
-            //        html: '666',
-            //        width: 100,
-            //        height: 100,
-            //        floating: true
-            //    })
-            //    panel.render();
+            var panel = new Ext.Panel({
+                    el: 'grid',
+                    title: '窗体A',
+                    html: '666',
+                    width: 100,
+                    height: 100,
+                    floating: true
+                })
+                panel.render();
 
             //------------------4------------------------
            //new Ext.Viewport({
@@ -69,178 +69,177 @@
            //     }, { region: 'south' }, { region: 'west' }, { region: 'east'}, {region:'center'}]
            // })
 
-            //Ext.create('Ext.container.Viewport', {
-            //    layout: 'border',
-            //    items: [{
-            //        region: 'north',
-            //        html: '<h1 class="x-panel-header">Page Title</h1>',
-            //        border: false,
-            //        margins: '0 0 5 0'
-            //    }, {
-            //        region: 'west',
-            //        collapsible: true,
-            //        title: 'Navigation',
-            //        width: 150
-            //        // 这里通常可以使用 TreePanel 或者 AccordionLayout布局的导航菜单
-            //    }, {
-            //        region: 'south',
-            //        title: 'South Panel',
-            //        collapsible: true,
-            //        html: 'Information goes here',
-            //        split: true,
-            //        height: 100,
-            //        minHeight: 100
-            //    }, {
-            //        region: 'east',
-            //        title: 'East Panel',
-            //        collapsible: true,
-            //        split: true,
-            //        width: 150
-            //    }, {
-            //        region: 'center',
-            //        xtype: 'tabpanel', // TabPanel本身没有title属性
-            //        activeTab: 0,      // 配置默认显示的激活面板
-            //        items: {
-            //            title: 'Default Tab',
-            //            html: 'The first tab\'s content. Others may be added dynamically'
-            //        }
-            //    }]
-            //});
-            //-------------------5-------------------
-        //    Person = function (name) {
-        //        Ext.util.Observable.prototype.constructor.call(this);//必须要有这行..\原因:待考证
-        //        this.name = arguments[0];
-        //        this.addEvents("work", "study");
-        //    }
-        //    Ext.extend(Person, Ext.util.Observable, {//使Person继承Ext.util.Observable所有属性
-        //        info: function (event) {
-        //            return this.name + ' is ' + event + 'ing';
-        //        }
-        //    })
-        //    var me = new Person("gao");
-        //    me.on('funwork', function () {//给对象添加监听事件
-        //        Ext.Msg.alert('event', this.name + "在上班的路上")
-        //    });
-        //    me.on('funstudy', function (project) {//给对象添加监听事件和形参
-        //        Ext.Msg.alert('event', this.name + "在学习" + project + "中");
-        //    })
-        //    Ext.get('work').on('click', function () {//给id为"work"的元素并添加绑定事件和事件处理函数
-        //        me.fireEvent('funwork');
-        //    });
-        //    Ext.get('study').on('click', function () {
-        //        me.fireEvent('funstudy','日语');
-        //    });
+           // Ext.create('Ext.container.Viewport', {
+           //     layout: 'border',
+           //     items: [{
+           //         region: 'north',
+           //         html: '<h1 class="x-panel-header">Page Title</h1>',
+           //         border: false,
+           //         margins: '0 0 5 0'
+           //     }, {
+           //         region: 'west',
+           //         collapsible: true,
+           //         title: 'Navigation',
+           //         width: 150
+           //         // 这里通常可以使用 TreePanel 或者 AccordionLayout布局的导航菜单
+           //     }, {
+           //         region: 'south',
+           //         title: 'South Panel',
+           //         collapsible: true,
+           //         html: 'Information goes here',
+           //         split: true,
+           //         height: 100,
+           //         minHeight: 100
+           //     }, {
+           //         region: 'east',
+           //         title: 'East Panel',
+           //         collapsible: true,
+           //         split: true,
+           //         width: 150
+           //     }, {
+           //         region: 'center',
+           //         xtype: 'tabpanel', // TabPanel本身没有title属性
+           //         activeTab: 0,      // 配置默认显示的激活面板
+           //         items: {
+           //             title: 'Default Tab',
+           //             html: 'The first tab\'s content. Others may be added dynamically'
+           //         }
+           //     }]
+           // });
+           // -------------------5-------------------
+           // Person = function (name) {
+           //     Ext.util.Observable.prototype.constructor.call(this);//必须要有这行..\原因:待考证
+           //     this.name = arguments[0];
+           //     this.addEvents("work", "study");
+           // }
+           // Ext.extend(Person, Ext.util.Observable, {//使Person继承Ext.util.Observable所有属性
+           //     info: function (event) {
+           //         return this.name + ' is ' + event + 'ing';
+           //     }
+           // })
+           // var me = new Person("gao");
+           // me.on('funwork', function () {//给对象添加监听事件
+           //     Ext.Msg.alert('event', this.name + "在上班的路上")
+           // });
+           // me.on('funstudy', function (project) {//给对象添加监听事件和形参
+           //     Ext.Msg.alert('event', this.name + "在学习" + project + "中");
+           // })
+           // Ext.get('work').on('click', function () {//给id为"work"的元素并添加绑定事件和事件处理函数
+           //     me.fireEvent('funwork');
+           // });
+           // Ext.get('study').on('click', function () {
+           //     me.fireEvent('funstudy','日语');
+           // });
 
-            //----------------------------6-----------------------
-            //var test = Ext.get('test');
-            //test.on('click', function () {
-            //    alert("1");
-            //})
-            //test.on('click', function () {
-            //    alert("2");
-            //})
+           //// ----------------------------6-----------------------
+           // var test = Ext.get('test');
+           // test.on('click', function () {
+           //     alert("1");
+           // })
+           // test.on('click', function () {
+           //     alert("2");
+           // })
 
-            //----------------------------7,监听空格-------------------------
+           // //----------------------------7,监听空格-------------------------
 
-            //Ext.get("ipt").on('keypress', function (e) {
-            //    if (e.charCode == Ext.EventObject.SPACE) {//将书中介绍的Ext.EventObjectImpl改为Ext.EventObject即可生效
-            //        Ext.Msg.alert("按下了空格键");
-            //    }
-            //})
+           // Ext.get("ipt").on('keypress', function (e) {
+           //     if (e.charCode == Ext.EventObject.SPACE) {//将书中介绍的Ext.EventObjectImpl改为Ext.EventObject即可生效
+           //         Ext.Msg.alert("按下了空格键");
+           //     }
+           // })
 
 
-            //--------------8、自定义事件----------------
-            //var fn = function (e, el, args) {//arg中的参数为single: true,delay: 1000,testID: 4
-            //    alert("案例8");
-            //    alert(args.testID);
-            //}
-            //Ext.get('test1').on('click', fn, this, {
-            //    single: true,
-            //    delay: 1000,
-            //    testID: 4
-            //});
+           //// --------------8、自定义事件----------------
+           // var fn = function (e, el, args) {//arg中的参数为single: true,delay: 1000,testID: 4
+           //     alert("案例8");
+           //     alert(args.testID);
+           // }
+           // Ext.get('test1').on('click', fn, this, {
+           //     single: true,
+           //     delay: 1000,
+           //     testID: 4
+           // });
 
-            //--------------------9,一次定义多个事件监听器---------------
-            //var fn = function (e, el, args) {//arg中的参数为single: true,delay: 1000,testID: 4
-            //    alert("鼠标点击了一下");
-            //}
-            //var fn2 = function () {
-            //    alert("鼠标覆盖了一下")
-            //}
-            //Ext.get('test2').on({
-            //    'click': {
-            //        fn: fn
-            //    },
-            //    'mouseover': { fn: fn2,single:true,delay:1000 }
-            //})
+           // //--------------------9,一次定义多个事件监听器---------------
+           // var fn = function (e, el, args) {//arg中的参数为single: true,delay: 1000,testID: 4
+           //     alert("鼠标点击了一下");
+           // }
+           // var fn2 = function () {
+           //     alert("鼠标覆盖了一下")
+           // }
+           // Ext.get('test2').on({
+           //     'click': {
+           //         fn: fn
+           //     },
+           //     'mouseover': { fn: fn2,single:true,delay:1000 }
+           // })
 
-            //----------------------10、设置事件拦截器-----------
-            //Person = function (name) {
-            //    Ext.util.Observable.prototype.constructor.call(this);//必须要有这行..\原因:待考证
-            //    this.name = arguments[0];
-            //    this.addEvents("work", "study");
-            //}
-            //Ext.extend(Person, Ext.util.Observable, {//使Person继承Ext.util.Observable所有属性
-            //    info: function (event) {
-            //        return this.name + ' is ' + event + 'ing';
-            //    }
-            //})
-            //var me = new Person("gao");
-            //me.on('funwork', function () {//给对象添加监听事件
-            //    Ext.Msg.alert('event', this.name + "在上班的路上")
-            //});
-            //me.on('funstudy', function (project) {//给对象添加监听事件和形参
-            //    Ext.Msg.alert('event', this.name + "在学习" + project + "中");
-            //})
-            //Ext.get('work').on('click', function () {//给id为"work"的元素并添加绑定事件和事件处理函数
-            //    me.fireEvent('funwork');
-            //});
-            //Ext.get('study').on('click', function () {
-            //    me.fireEvent('funstudy','日语');
-            //});
-            ////点击capture1按钮后,就会给对象me添加了拦截函数
-            //Ext.get('capture1').on('click', function () {
-            //    Ext.util.Observable.capture(me, function () {
-            //        alert("capture1");//执行拦截时的函数,执行完毕后继续执行被拦截的函数
-            //        return true;//拦截但不终止事件
-            //    })
-            //})
-            ////同capture1,只是会终止事件进行
-            //Ext.get('capture2').on('click', function () {
-            //    Ext.util.Observable.capture(me, function () {
-            //        alert("capture2");//执行完毕后终止被拦截的函数
-            //        return false;//拦截且终止
-            //    })
-            //}) 
-            //Ext.get('releasecapture').on('click', function () {
-            //    Ext.util.Observable.releaseCapture(me);//清除在某个对象上的所有的拦截函数
-            //});
+           // //----------------------10、设置事件拦截器-----------
+           // Person = function (name) {
+           //     Ext.util.Observable.prototype.constructor.call(this);//必须要有这行..\原因:待考证
+           //     this.name = arguments[0];
+           //     this.addEvents("work", "study");
+           // }
+           // Ext.extend(Person, Ext.util.Observable, {//使Person继承Ext.util.Observable所有属性
+           //     info: function (event) {
+           //         return this.name + ' is ' + event + 'ing';
+           //     }
+           // })
+           // var me = new Person("gao");
+           // me.on('funwork', function () {//给对象添加监听事件
+           //     Ext.Msg.alert('event', this.name + "在上班的路上")
+           // });
+           // me.on('funstudy', function (project) {//给对象添加监听事件和形参
+           //     Ext.Msg.alert('event', this.name + "在学习" + project + "中");
+           // })
+           // Ext.get('work').on('click', function () {//给id为"work"的元素并添加绑定事件和事件处理函数
+           //     me.fireEvent('funwork');
+           // });
+           // Ext.get('study').on('click', function () {
+           //     me.fireEvent('funstudy','日语');
+           // });
+           // //点击capture1按钮后,就会给对象me添加了拦截函数
+           // Ext.get('capture1').on('click', function () {
+           //     Ext.util.Observable.capture(me, function () {
+           //         alert("capture1");//执行拦截时的函数,执行完毕后继续执行被拦截的函数
+           //         return true;//拦截但不终止事件
+           //     })
+           // })
+           // //同capture1,只是会终止事件进行
+           // Ext.get('capture2').on('click', function () {
+           //     Ext.util.Observable.capture(me, function () {
+           //         alert("capture2");//执行完毕后终止被拦截的函数
+           //         return false;//拦截且终止
+           //     })
+           // }) 
+           // Ext.get('releasecapture').on('click', function () {
+           //     Ext.util.Observable.releaseCapture(me);//清除在某个对象上的所有的拦截函数
+           // });
 
-            //Ext.get('suspendEvents').on('click', function () {//暂停某个对象上所有事件的发生
-            //    me.suspendEvents();
-            //});
-            //Ext.get('resumeEvents').on('click', function () {//恢复某个对象上所有事件
-            //    me.resumeEvents();
-            //});
-            //------------------------11、---------------------
-            //alert弹窗中的内容只能用空格使文字居中
-            Ext.Msg.alert("alert", "<p text-align='center'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp如何使内容居中?</p>");
+           // Ext.get('suspendEvents').on('click', function () {//暂停某个对象上所有事件的发生
+           //     me.suspendEvents();
+           // });
+           // Ext.get('resumeEvents').on('click', function () {//恢复某个对象上所有事件
+           //     me.resumeEvents();
+           // });
+           // //------------------------11、---------------------
+           // //alert弹窗中的内容只能用空格使文字居中
+           // Ext.Msg.alert("alert", "<p text-align='center'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp如何使内容居中?</p>");
         });
     </script>
 
 </head>
 <body>
     <script type="text/javascript" src="../examples/shared/examples.js"></script>
-    <!--<button id="test">案例6</button>-->
-    <!--<div id="grid"></div>
+    <button id="test">案例6</button>
+    <div id="grid"></div>
 
-    <button id="work">work</button>
-    <button id="study">study</button>-->
-    <!--<input type="text" id="ipt"/>-->
-    <!--<button id="test1">案例6</button>-->
-    <!--<button id="test2">案例9</button>-->
-    <!--------------10--------------->
-    <!--<button id="capture1">拦截事件</button>
+    <!--<button id="work">work</button>
+    <input type="text" id="ipt"/>
+    <button id="test1">案例6</button>
+    <button id="test2">案例9</button>
+    ------------10-------------
+    <button id="capture1">拦截事件</button>
     <button id="capture2">拦截并终止事件</button>
     <button id="work">work</button>
     <button id="study">study</button>

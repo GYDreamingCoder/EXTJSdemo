@@ -802,6 +802,8 @@
     <Content Include="Demoes\chapter3.html" />
     <Content Include="Demoes\chapter6.html" />
     <Content Include="Demoes\chapter4.html" />
+    <Content Include="Demoes\chapter7.html" />
+    <Content Include="Demoes\chapter8.html" />
     <Content Include="Demoes\demo1.html" />
     <Content Include="Demoes\TestHTML\12-01-03-01.html" />
     <Content Include="Demoes\TestHTML\12-01-03-02.html" />

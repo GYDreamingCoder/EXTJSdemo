@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>第七章-窗口</title>
+    <link href="../resources/css/ext-all.css" rel="stylesheet" />
+    <script type="text/javascript" src="../ext-all.js"></script>
+    <script>
+        Ext.onReady(function () {
+            //----------------------基础弹窗---------------------------
+
+            //注意:使用Ext.Msg不能同时弹出多个弹窗
+
+            //Ext.Msg.alert("hello world", "I'm coming now", function (btn) {
+            //    alert("哒哒哒" + btn);
+            //});
+
+            //Ext.Msg.confirm("Hi", "I'm here", function (btn) {
+            //    alert("你刚刚点击了" + btn);
+            //})
+
+            //Ext.Msg.prompt("prompt弹窗","请输入内容",function (btn,text) {
+            //    alert("你刚刚输入的内容是" + text);
+            //})
+
+            //Ext.Msg.show({
+            //    title: "请输入多行内容",
+            //    msg: '你可以输入好几行',
+            //    width: 300,
+            //    buttons: Ext.Msg.OKCANCEL,
+            //    multiline: true,//可以输入多行
+            //    fn: function (btn,text) {
+            //        alert("你刚刚输入了" + text);
+            //    }
+            //})
+
+            //Ext.Msg.show({
+            //    title: "自定义弹窗",
+            //    msg: "弹窗内容",
+            //    buttons: Ext.Msg.YESNOCANCEL,
+            //    closable:false,//关闭右上角的关闭按钮
+            //    fn: function() {
+            //        alert("此函数在点击任意按钮之后执行");  
+            //    },
+            //})
+
+            //---------------------------------2、窗口-------------------------------
+
+
+            var columns = [
+                { header: '编号', dataIndex: 'id' },
+                { header: '名称', dataIndex: 'name' },
+                { header: '描述', dataIndex: 'desc' }
+            ]
+
+            var data = [
+               ['1','嘿嘿','desc1'],
+               ['2','哈哈','desc2'],
+               ['3','哼哼','desc3']
+            ]
+
+            var store = new Ext.data.ArrayStore({
+                data: data,
+                fields: [
+                    {name:'id'},
+                    {name:'name'},
+                    {name:'desc'}
+                ]
+            })
+            store.load();
+
+            var grid = new Ext.grid.GridPanel({
+                region: 'north',
+                rederTo: 'grid',
+                store: store,
+                columns: columns,
+            })
+
+            var form = new Ext.form.FormPanel({
+                region:'south',
+                labelAlign: 'right',
+                labelWidth: 50,
+                frame: true,
+                defaultType: 'textfield',
+                items: [{
+                    fieldLabel: '文本',
+                    name: 'text',
+                }, {
+                        fieldLabel: '日期',
+                        name: 'date',
+                        xtype:'datefield'
+                    }]
+            })
+
+
+            var win = new Ext.Window({
+                layout: 'border',//充满整个窗口
+                width: 500,
+                height: 300,
+                maximizable: true,//右上角显示最大化按钮
+                minimizable: true,
+                closeAcion: 'hide',//hide为隐藏,但窗口对象并没有被销毁,对应hide()方法;close为关闭,且窗口对象也被销毁,对应close()方法
+                items: [grid,form],//如果不为items中的组件指定xtype,则默认为Ext.Panel对象
+                constrain: true,//使窗体不能拖到浏览器边界之外
+                buttons: [{
+                    text: 'OK',
+                    handler: function () {
+                        win.hide();
+                    }
+                }, {
+                    text: "Cancel",
+                    handler: function () {
+                        alert("请不要关闭");
+                    }
+                }]
+            });
+            win.show();
+        })
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

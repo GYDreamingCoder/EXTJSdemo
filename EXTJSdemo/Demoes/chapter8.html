@@ -6,12 +6,139 @@
     <link href="../resources/css/ext-all.css" rel="stylesheet" />
     <script type="text/javascript" src="../ext-all.js"></script>
     <script>
+        Ext.Loader.setPath('Ext.ux', '../examples/ux');//设置路径命名空间
+        Ext.require('Ext.ux.data.PagingMemoryProxy'); //引入命名空间
 
 
+        Ext.onReady(function () {
+
+            var tb = new Ext.Toolbar();
+            tb.render('toolbar');
+            //为工具条增加4个按钮
+            tb.add(
+                {
+                    text: "新建",
+                    handler: function () {
+                        Ext.Msg.alert("提示", "哈哈哈");
+                    }
+                }, {
+                    text: '修改'
+                }, {
+                    text: '删除'
+                }, {
+                    text: '显示'
+                })
+
+            var SubMenu = new Ext.menu.Menu();
+            SubMenu.add({
+                text: '新建',
+                handler: function () {
+                    Ext.Msg.alert("提示", "这是回调函数哦");
+                }
+            });
+            SubMenu.add("-");
+            SubMenu.add({ text: '打开' });
+            SubMenu.add("-");
+            SubMenu.add({ text: '保存' });
+
+            var Menu = new Ext.menu.Menu();//定义多级菜单
+            Menu.add({//给多级菜单添加选项
+                text: '新建',
+                menu: SubMenu,
+                handler: function () {
+                    Ext.Msg.alert("提示", "这是回调函数哦");
+                }
+            });
+            Menu.add("-");
+            Menu.add({ text: '打开' });
+            Menu.add("-");
+            Menu.add({ text: '保存' });
+
+            tb.add({//给工具栏添加多级菜单
+                text: '文件',
+                menu: Menu
+            })
+
+            var SubMenuMult = new Ext.menu.Menu({
+                items: [
+                    { text: '新新一' },
+                    { text: '新新二' },
+                    { text: '新新三' },
+                    { text: '新新四' },
+                ]
+            })
+            var MenuMult = new Ext.menu.Menu({
+                items: [
+                    { text: '新新一', menu: SubMenuMult},
+                    {text:'新新二'},
+                    {text:'新新三'},
+                    {text:'新新四'},
+                ]
+            })
+            tb.add({
+                text: '多级菜单',
+                menu: MenuMult
+            })
+
+
+            //-------------------------分页工具条---------------------
+            var columns = [
+                { header: '编号', dataIndex: 'id' },
+                { header: '名称', dataIndex: 'name' },
+                { header: '描述', dataIndex: 'descn' }
+            ];
+
+            var data = [
+                ['1', 'name1', 'descn1'],
+                ['2', 'name2', 'descn2'],
+                ['3', 'name3', 'descn3'],
+                ['4', 'name4', 'descn4'],
+                ['5', 'name5', 'descn5']
+            ];
+
+            var store = new Ext.data.ArrayStore({
+                pageSize: 3,
+                proxy: {
+                    type: 'pagingmemory',//获取数据的方式 (要记得引入相应的命名空间,否则无法生效)
+                    data: data,
+                    reader: {
+                        type: 'array'//获取的数据用array来解析
+                    }
+                },
+                fields: [
+                    { name: 'id' },
+                    { name: 'name' },
+                    { name: 'descn' }
+                ]
+            });
+
+            var grid = new Ext.grid.GridPanel({
+                renderTo: 'grid',
+                width:300,
+                autoHeight: true,
+                store: store,
+                columns: columns,
+                bbar: new Ext.PagingToolbar({
+                    pageSize: 3,
+                    store: store,
+                    displayInfo: true,
+                    enableOverflow:true,//工具条溢出处理
+                    items: [{
+                        text:'添加'
+                    }, {
+                            text:'删除'
+                        },{
+                            text: '移动'
+                        }]
+                })
+            })
+            store.load({ params: { start: 0, limit: 3 } });
+        })
     </script>
 
 </head>
 <body>
-
+    <div id="toolbar"></div>
+    <div id="grid"></div>
 </body>
 </html>

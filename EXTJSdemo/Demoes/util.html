@@ -5,6 +5,21 @@
     <title>常用方法</title>
     <link href="../resources/css/ext-all.css" rel="stylesheet" />
     <script type="text/javascript" src="../ext-all.js"></script>
+    <script>
+        //一.onReady()
+        Ext.onReady(function () {//参数一:回调函数;参数二:函数作用域;参数三:函数执行相关的属性配置项,包括delay,single,buffer
+            alert("5秒后弹窗");
+        }, this, {delay:5000})
+
+        //二.get系列函数
+        //1、Ext.get(id,Element,dom对象,dom对应的Ext对象): 获取DOM节点对应的Ext元素；2.、Ext.get(id).dom:获取Ext元素对应的DOM对象
+        //1、Ext.getCmp(id)：用来获取一个Ext组件，也就是在页面中已经被初始化了的组件或者子类对象
+        //1、Ext.getDom(id,dom对象,dom对应的Ext对象)：能够获得文档中的DOM节点
+        //1、Ext.getBody(): 直接获取文档中的document.body这个DOM节点对应的Ext元素，我们可以把它当做快速更新页面显示组件的方法
+        //1、Ext.getDoc(): 获取document对象
+        //1、encode()和decode(): 专门用来对Json数据进行编码和解码的函数
+    </script>
+
 </head>
 <body>
 

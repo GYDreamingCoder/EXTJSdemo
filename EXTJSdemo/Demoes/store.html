@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../resources/css/ext-all.css" rel="stylesheet" />
+    <script type="text/javascript" src="../ext-all.js"></script>
+    <script>
+        Ext.Loader.setPath('Ext.ux', '../examples/ux');//设置路径命名空间
+        Ext.require('Ext.ux.data.PagingMemoryProxy'); //引入命名空间
+
+        //第九章知识点总结:
+        //1、Ext.data.Connection对象：是对ajax的封装, 提供了配置ajax的通用方式，可以从指定的url中获取数据, 在建立conn连接之后, 可以调用request()发送请求
+
+        //2、Request()函数的常用参数：1、url(请求地址) 2.parmas(请求传递的参数) 3.method(请求方法, 通常为POST / Get) 4.callback(请求完成后的回调参数, 无论请求成功还是失败)
+            //5.success 6.failure 7.scope(回调函数的作用域) 8.form(绑定的表单)
+
+        //3、Record
+        //Ext.data.Record对象: 如果将data.Store看成一张二维表,那么Record则可以看成表中的一行数据.Record的主要功能是保存数据,并且在内部数据发生改变
+        //时记录修改装填, 保留修改之前的原始值.可以使用rec.data.key获得record中的值, 可以通过rec.set(key, newvalue)来修改record中的值.在record中的
+        //属性数据被修改后,还可以执行,"提交","撤销","获得修改后的部分",判断当前record中的数据是否被修改
+
+        //4、Store
+        //1）每个store至少需要两种组件支持,分别是proxy和reade，前者用来从某个路径读取原始数据，后者用来将原始数据装换成record实例,store.load()实现转换过程
+        //2）store.getAt()和store.each()方法可以遍历store中的行；store.find()和store.findBy(fn)函数可以搜索行对象,findBy()可以自定义搜索函数,参考pdf269页
+        //3）store.add(),store.insert(),store.remove()可以添加和移除store中的行
+        //4）store.filter()和store.filterBy(fn)可以使store显示过滤之后的数据,用法与find/findBy相似
+
+
+        //5、Proxy
+        //1）MemoryProxy:只能从javascript对象获取数据，可以直接把数组或JSON或XML格式的数据交给它处理，如下
+        var proxy = new Ext.data.MemoryProxy([
+            ['id1','name1','descn1'],
+            ['id2','name2','descn2'],
+        ])
+        //2）HttpProxy: 通过Ajax去后台取数据,构造它时需要色设置url参数。
+        var proxy = new Ext.data.HttpProxy({ url:'xxxx'})
+        //3) ScriptTagProxy :用法与HttpProxy几乎一样，但支持跨域
+        //暂不示例
+
+        //6、Reader
+        //1）ArrayReader：从二维数组里依次读取数据，然后生成对应的Record。不支持分页
+        //2）JsonReader: 支持分页,具体使用参考pdf276页
+        //3) XMLReader
+        //4)使用组合方案:
+        ArrayStore = Store + MemoryProxy + ArrayReader;
+        JsonStore = Store + HttpProxy + JsonReader;
+
+
+        Ext.onReady(function () {
+            var conn = new Ext.data.Connection({
+                autoAbort: false,
+                defaultHeaders: {
+                    referer: 'http://localhost:8080/',
+                },
+                disableCaching: false,
+                extraParams: {
+                    name:name
+                },
+                method: 'Get',
+                timeout: 300,
+                url:'02.txt'
+            })
+
+            var PersonRecord = Ext.data.Record.create([//定义Record类型
+                { name: 'name', type: 'string' },
+                { name: 'sex', type: 'string' },
+                { name: 'age', type: 'int' }
+            ])
+
+            var boy = new PersonRecord({
+                name: 'boy',
+                sex: '男',
+                age:15
+            })
+
+            var data = [
+                ['妞妞', '男',13],
+                ['壮壮', '女',12]
+            ]
+            var store = new Ext.data.Store({
+                proxy: new Ext.data.MemoryProxy(data),
+                reader: new Ext.data.ArrayReader({},PersonRecord)//将data数组中的数据转换成对应的几个PersonRecord实例,然后放入Store中.
+            })
+            store.load({
+                params: { start: 0, limit: 20 },//在加载时发送的附加参数
+                callback: function () {//加载完毕时的回调函数
+                    Ext.Msg.alert('into', '加载完毕');
+                },
+                scope: store,//回调函数执行时的作用域
+                add:true//为true时,得到的数据会添加在原来的store数据的末尾,否则会清楚之前的数据,再将得到的数据添加到store中.
+            });
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

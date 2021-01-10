@@ -1,20 +1,20 @@
-Ext.define('Ext.ux.form.SearchField', {
+ï»¿Ext.define('Ext.ux.form.SearchField', {
     extend: 'Ext.form.field.Trigger',
 
-    alias: 'widget.searchfield',//±ğÃû
+    alias: 'widget.searchfield',//åˆ«å
 
-    trigger1Cls: Ext.baseCSSPrefix + 'form-clear-trigger',//¸ø°´Å¥¸½¼ÓCSSÑùÊ½
+    trigger1Cls: Ext.baseCSSPrefix + 'form-clear-trigger',//ç»™æŒ‰é’®é™„åŠ CSSæ ·å¼
 
-    trigger2Cls: Ext.baseCSSPrefix + 'form-search-trigger',//¸ø°´Å¥¸½¼ÓCSSÑùÊ½
+    trigger2Cls: Ext.baseCSSPrefix + 'form-search-trigger',//ç»™æŒ‰é’®é™„åŠ CSSæ ·å¼
 
-    hasSearch : false,//×Ô¶¨ÒåÊôĞÔ
-    paramName : 'query',//×Ô¶¨ÒåÊôĞÔ
+    hasSearch: false,//è‡ªå®šä¹‰å±æ€§
+    paramName: 'query',//è‡ªå®šä¹‰å±æ€§
 
-    initComponent: function () {//¸²¸Ç¸¸ÀàµÄinitComponent()º¯Êı,³õÊ¼»¯×é¼ş
+    initComponent: function () {//è¦†ç›–çˆ¶ç±»çš„initComponent()å‡½æ•°,åˆå§‹åŒ–ç»„ä»¶
         var me = this;
 
-        me.callParent(arguments); //È·±£¸¸ÀàµÄÔÚInitComponentÖĞµÄ·½·¨ÊÇ´«µİ¸ø¹¹Ôìº¯ÊıµÄcalled
-        me.on('specialkey', function(f, e){//¶¨Òå¼üÅÌ°´Å¥À´´¥·¢ËÑË÷ÊÂ¼ş
+        me.callParent(arguments); //ç¡®ä¿çˆ¶ç±»çš„åœ¨InitComponentä¸­çš„æ–¹æ³•æ˜¯ä¼ é€’ç»™æ„é€ å‡½æ•°çš„called
+        me.on('specialkey', function (f, e) {//å®šä¹‰é”®ç›˜æŒ‰é’®æ¥è§¦å‘æœç´¢äº‹ä»¶
             if (e.getKey() == e.ENTER) {
                 me.onTrigger2Click();
             }
@@ -29,17 +29,17 @@ Ext.define('Ext.ux.form.SearchField', {
         if (!me.store.proxy.hasOwnProperty('filterParam')) {
             me.store.proxy.filterParam = me.paramName;
         }
-        me.store.proxy.encodeFilters = function(filters) {
+        me.store.proxy.encodeFilters = function (filters) {
             return filters[0].value;
         }
     },
 
-    afterRender: function () {//ÔÊĞíÍê³ÉäÖÈ¾Ö®ºóÌí¼ÓĞĞÎª
+    afterRender: function () {//å…è®¸å®Œæˆæ¸²æŸ“ä¹‹åæ·»åŠ è¡Œä¸º
         this.callParent();
         this.triggerCell.item(0).setDisplayed(false);
     },
 
-    onTrigger1Click : function(){
+    onTrigger1Click: function () {
         var me = this;
 
         if (me.hasSearch) {
@@ -51,7 +51,7 @@ Ext.define('Ext.ux.form.SearchField', {
         }
     },
 
-    onTrigger2Click : function(){
+    onTrigger2Click: function () {
         var me = this,
             value = me.getValue();
 

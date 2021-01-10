@@ -116,11 +116,33 @@
             });
             win.show();
         })
-
+        function s() {
+            var win1 = new Ext.Window({
+                layout: 'border',//充满整个窗口
+                width: 500,
+                height: 300,
+                maximizable: true,//右上角显示最大化按钮
+                minimizable: true,
+                closeAcion: 'hide',//hide为隐藏,但窗口对象并没有被销毁,对应hide()方法;close为关闭,且窗口对象也被销毁,对应close()方法
+                constrain: true,//使窗体不能拖到浏览器边界之外
+                buttons: [{
+                    text: 'OK',
+                    handler: function () {
+                        win.hide();
+                    }
+                }, {
+                    text: "Cancel",
+                    handler: function () {
+                        alert("请不要关闭");
+                    }
+                }]
+            });
+            win1.show();
+        }
 
     </script>
 </head>
 <body>
-
+    <button onclick="s()"></button>
 </body>
 </html>

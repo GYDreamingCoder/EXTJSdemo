@@ -19,32 +19,32 @@
         Ext.onReady(function () {
 
             //    //----------------------------BorderLayout布局-------------------------
-            //var viewport = new Ext.Viewport({
-            //    layout: 'border',
-            //    items: [
-            //        {
-            //            region: 'north',
-            //            height: 300,
-            //            title: 'northPanel',
-            //            collapsible: true,
-            //            html: '<h1>顶栏</h1>'
-            //        },
-            //        {
-            //            region: 'west',
-            //            width: 300,
-            //            title: 'WestPanel',
-            //            collapsible: true,
-            //            html: '<p>菜单</p><p>菜单2</p>'
-            //        },
-            //        {
-            //            region: 'center',
-            //            width: 100,
-            //            title: 'CenterPanel',//折叠区域标题（要实现区域可折叠功能,此项必须配置）
-            //            collapsible: true,//将此区域设置为可折叠
-            //            html: '主要内容'
-            //        }
-            //    ]
-            //})
+            var viewport = new Ext.Viewport({
+                layout: 'border',
+                items: [
+                    {
+                        region: 'north',
+                        height: 300,
+                        title: 'northpanel',
+                        collapsible: true,
+                        html: '<h1>顶栏</h1>'
+                    },
+                    {
+                        region: 'west',
+                        width: 300,
+                        title: 'westpanel',
+                        collapsible: true,
+                        html: '<p>菜单</p><p>菜单2</p>'
+                    },
+                    {
+                        region: 'center',
+                        width: 100,
+                        title: 'centerpanel',//折叠区域标题（要实现区域可折叠功能,此项必须配置）
+                        collapsible: true,//将此区域设置为可折叠
+                        html: '主要内容'
+                    }
+                ]
+            })
 
             //---------------------------------------Accordion-------------------------------------
             //var viewport = new Ext.Viewport({
